@@ -1,0 +1,261 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Fund - Login</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #2c3e50; /* Dark background for contrast */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Full height for vertical centering */
+            margin: 0; /* Remove default margin */
+            color: white; /* White text color */
+        }
+
+        .wrapper {
+            background: #34495e; /* Darker form background */
+            border-radius: 15px; /* Rounded corners */
+            padding: 40px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5); /* Deep shadow for 3D effect */
+            width: 90%;
+            max-width: 400px; /* Max width for larger screens */
+            text-align: center; /* Center text inside the form */
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        .error-message {
+            background: #e74c3c; /* Red background for error message */
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px; /* Space below error message */
+        }
+
+        label {
+            display: block;
+            text-align: left; /* Align labels to the left */
+            margin: 10px 0 5px; /* Spacing around labels */
+        }
+
+        input {
+            width: 100%; /* Full width for inputs */
+            max-width: 375px; /* Set a maximum width */
+            padding: 12px;
+            margin: 12px auto; /* Center the inputs and add margin on top and bottom */
+            border: none;
+            border-radius: 8px; /* Rounded corners for inputs */
+            font-size: 16px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Shadow for inputs */
+            transition: all 0.2s ease; /* Smooth transition */
+            background: #ecf0f1; /* Light background for inputs */
+            color: #2c3e50; /* Dark text color for inputs */
+        }
+
+        input:focus {
+            box-shadow: 0 0 10px rgba(41, 128, 185, 0.8); /* Blue glow effect on focus */
+            outline: none; /* Remove outline */
+        }
+
+        button {
+            width: 100%; /* Full width for button */
+            max-width: 360px; /* Set a maximum width */
+            background: linear-gradient(145deg, #3498db, #2980b9); /* Blue gradient */
+            color: white;
+            cursor: pointer; /* Pointer cursor for button */
+            border: none; /* No border for buttons */
+            padding: 12px;
+            margin: 20px auto 0; /* Center the button and add margin above */
+            border-radius: 8px; /* Rounded corners */
+            font-size: 16px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Shadow for button */
+            transition: background 0.3s, transform 0.3s; /* Smooth transitions for background and transform */
+        }
+
+        button:hover {
+            background: linear-gradient(145deg, #2980b9, #3498db); /* Change gradient on hover */
+            transform: translateY(-2px); /* Move button up on hover */
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4); /* Deeper shadow for hover effect */
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <h1>Login</h1>
+
+        {% if error_message %}
+        <div class="error-message">{{ error_message }}</div>
+        {% endif %}
+
+        <form method="POST" action="">
+            {% csrf_token %}
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" placeholder="Apna username dalen" required>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Password dalen" required>
+            
+            <button type="submit">Login</button>
+        </form>
+    </div>
+    {% comment %} <a href="{% url 'index' %}">Back to Home</a> {% endcomment %}
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+{% comment %} {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Fund - Login</title>
+    
+</head>
+<body>
+    <div class="wrapper">
+        <h1>Login</h1>
+
+        {% if error_message %}
+        <div class="error-message">{{ error_message }}</div>
+        {% endif %}
+
+        <form method="POST" action="">
+            {% csrf_token %}
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" placeholder="Apna username dalen" required>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="password dalen" required>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</body>
+</html> {% endcomment %}
+
+{% comment %} 
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Fund - Login</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #2c3e50; /* Dark background for contrast */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Full height for vertical centering */
+            margin: 0; /* Remove default margin */
+            color: white; /* White text color */
+        }
+
+        .wrapper {
+            background: #34495e; /* Darker form background */
+            border-radius: 15px; /* Rounded corners */
+            padding: 40px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5); /* Deep shadow for 3D effect */
+            width: 90%;
+            max-width: 400px; /* Max width for larger screens */
+            text-align: center; /* Center text inside the form */
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        .error-message {
+            background: #e74c3c; /* Red background for error message */
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px; /* Space below error message */
+        }
+
+        label {
+            display: block;
+            text-align: left; /* Align labels to the left */
+            margin: 10px 0 5px; /* Spacing around labels */
+        }
+
+        input {
+            width: 100%; /* Full width for inputs */
+            max-width: 375px; /* Set a maximum width */
+            padding: 12px;
+            margin: 12px auto; /* Center the inputs and add margin on top and bottom */
+            border: none;
+            border-radius: 8px; /* Rounded corners for inputs */
+            font-size: 16px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Shadow for inputs */
+            transition: all 0.2s ease; /* Smooth transition */
+            background: #ecf0f1; /* Light background for inputs */
+            color: #2c3e50; /* Dark text color for inputs */
+        }
+
+        input:focus {
+            box-shadow: 0 0 10px rgba(41, 128, 185, 0.8); /* Blue glow effect on focus */
+            outline: none; /* Remove outline */
+        }
+
+        button {
+            width: 100%; /* Full width for inputs */
+            max-width: 360px; /* Set a maximum width */
+            background: linear-gradient(145deg, #3498db, #2980b9); /* Blue gradient */
+            color: white;
+            cursor: pointer; /* Pointer cursor for button */
+            border: none; /* No border for buttons */
+            padding: 12px;
+            margin: 40px;
+            border-radius: 8px; /* Rounded corners */
+            font-size: 16px;
+            width: 100%; /* Full width for button */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Shadow for button */
+            transition: background 0.3s, transform 0.3s; /* Smooth transitions for background and transform */
+        }
+
+        button:hover {
+            background: linear-gradient(145deg, #2980b9, #3498db); /* Change gradient on hover */
+            transform: translateY(-2px); /* Move button up on hover */
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4); /* Deeper shadow for hover effect */
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <h1>Login</h1>
+
+        {% if error_message %}
+        <div class="error-message">{{ error_message }}</div>
+        {% endif %}
+
+        <form method="POST" action="">
+            {% csrf_token %}
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" placeholder="Apna username dalen" required>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Password dalen" required>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</body>
+</html> {% endcomment %}

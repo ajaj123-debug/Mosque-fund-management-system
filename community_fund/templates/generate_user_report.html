@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate User Report</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #2c3e50; /* Dark background */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px; /* Adjusted padding for mobile */
+            color: white; /* White text color */
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        form {
+            background: #34495e; /* Darker form background */
+            border-radius: 12px; /* More rounded corners */
+            padding: 30px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5); /* Deeper shadow for 3D effect */
+            width: 90%; /* Full width on mobile */
+            max-width: 400px; /* Max width for larger screens */
+            text-align: center; /* Center text inside the form */
+        }
+
+        input, select, button {
+            width: 100%; /* Full width for inputs and buttons */
+            padding: 12px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 8px; /* More rounded corners */
+            font-size: 16px;
+            transition: all 0.3s ease; /* Smooth transition */
+            background: #ecf0f1; /* Light background for inputs */
+            color: #2c3e50; /* Dark text color for inputs */
+        }
+
+        input:focus, select:focus {
+            box-shadow: 0 0 10px rgba(41, 128, 185, 0.8); /* Blue glow effect on focus */
+            outline: none; /* Remove outline */
+        }
+
+        button {
+            background: linear-gradient(145deg, #3498db, #2980b9); /* Blue gradient */
+            color: white;
+            cursor: pointer; /* Pointer cursor for button */
+            border: none; /* No border for buttons */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Shadow for buttons */
+            transition: background 0.3s, transform 0.3s; /* Smooth transitions for background and transform */
+        }
+
+        button:hover {
+            background: linear-gradient(145deg, #2980b9, #3498db); /* Change gradient on hover */
+            transform: translateY(-2px); /* Move button up on hover */
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4); /* Deeper shadow for hover effect */
+        }
+
+        a {
+            text-decoration: none; /* Remove underline from link */
+            color: #ecf0f1; /* Light text color for link */
+            font-size: 16px; /* Font size for the link */
+        }
+
+        .return-home {
+            margin-top: 20px; /* Margin above return home section */
+        }
+
+        /* Media Queries for Responsiveness */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.5em; /* Smaller heading on mobile */
+            }
+
+            form {
+                padding: 20px; /* Less padding on mobile */
+            }
+
+            button {
+                font-size: 14px; /* Smaller font size for buttons */
+            }
+
+            input, select {
+                font-size: 14px; /* Smaller font size for inputs */
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Generate User Report</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Generate Report</button>
+    </form></br></br>
+        <a href="{% url 'home' %}">
+            <button type="button">Go to Home</button>
+        </a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mosque Fund Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+        header {
+            background: #005f73;
+            color: white;
+            width: 100%;
+            text-align: center;
+            padding: 20px 0;
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+
+        .section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 90%;
+            max-width: 1200px;
+            margin: 20px 0;
+        }
+
+        /* Layout for savings cards */
+        .savings-container {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        /* Left column with stacked savings cards */
+        .savings-left {
+            display: flex;
+            flex-direction: column;
+            width: 48%;
+            justify-content: space-between;
+        }
+
+        /* Right column for Total Savings card */
+        .savings-right {
+            width: 48%;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Ensure the two left cards share height equal to the right card */
+        .savings-left .savings-card {
+            height: 50%; /* Each card takes half the height */
+        }
+
+        .savings-card {
+            background: #e9f5f5;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin: 10px 0;
+            text-align: center;
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .savings-card:hover {
+            transform: translateY(-5px);
+        }
+
+        h2 {
+            color: #005f73;
+            margin: 0 0 15px;
+            font-weight: 600;
+        }
+
+        strong {
+            color: #333;
+        }
+
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            text-align: center;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+        }
+
+        li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .button {
+            background: #005f73;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px 0;
+            transition: background 0.3s, transform 0.3s;
+            width: 100%;
+            max-width: 200px;
+        }
+
+        .button:hover {
+            background: #0a9396;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        .utton {
+            background: #005f73;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px 0;
+            transition: background 0.3s, transform 0.3s;
+            width: 100%;
+            max-width: 200px;
+        }
+
+        .utton:hover {
+            background: #0a9396;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Responsive styles for smaller screens */
+        @media (max-width: 900px) {
+            .savings-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .savings-left, .savings-right {
+                width: 100%;
+            }
+
+            .savings-left .savings-card {
+                height: auto; /* Auto height on smaller screens */
+            }
+        }
+
+        footer {
+            margin-top: auto;
+            padding: 20px;
+            text-align: center;
+            background-color: #005f73;
+            color: white;
+            width: 100%;
+            border-radius: 20px 20px 0 0;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ</h1>
+        <h1>Masjid Fund Itwa Dashboard</h1>
+    </header>
+
+    <!-- Savings Section -->
+    <div class="section">
+        <h1>बचत का खुलासा</h1>
+        <div class="savings-container">
+            <!-- Left side with Current and Last Month's Savings stacked -->
+            
+            <div class="savings-right">
+                <div class="savings-card" style="width: 100%; height: 80%;">
+                    <h2>अब तक की कुल बचत +</h2>
+                    <p><strong>₹{{ total_savings }}</strong></p>
+                </div>
+            </div>
+
+            <!-- Right side with Total Savings -->
+            <div class="savings-left">
+                <div class="savings-card">
+                    <h2>मौजूदा महीने की बचत +</h2>
+                    <p><strong>₹{{ current_month_savings }}</strong></p>
+                </div>
+                <div class="savings-card">
+                    <h2>पिछले महीने की बचत +</h2>
+                    <p><strong>₹{{ total_savings_previous }}</strong></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Deductions Section -->
+    <div class="section">
+        <h1>कटौती का खुलाशा</h1>
+        <div class="card">
+            <h2>अब तक की कुल कटौतियां -</h2>
+            <p><strong>₹{{ total_deductions }}</strong></p>
+        </div>
+        <div class="card">
+            <h2>मौजूदा महीने की कटौतियां -</h2>
+            <p><strong>₹{{ current_month_deductions }}</strong></p>
+        </div>
+        <div class="card">
+            <h2>खर्च का खुलासा</h2>
+            {% if deductions %}
+                <ul>
+                    {% for deduction in deductions %}
+                        <li>{{ deduction.category }}: <strong>₹{{ deduction.amount }}</strong> on {{ deduction.date|date:"F j, Y" }}</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>कोई कटौती दर्ज नहीं की गई है</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Recent Transactions Section -->
+    <div class="section">
+        <div class="card">
+            <h2>बचत +</h2>
+            {% if recent_transactions %}
+                <ul>
+                    {% for transaction in recent_transactions %}
+                        <li>{{ transaction.user.name }}: <strong>₹{{ transaction.amount }}</strong> on {{ transaction.date|date:"F j, Y, g:i A" }}</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>बचत दर्ज नहीं कराई गई है</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Generate and Manage User Reports Section -->
+    <div class="section">
+        <h1>सबका खाता देखें</h1>
+        <div class="card">
+            <a href="{% url 'generate_user_report' %}">
+                <button class="button" type="button">नाम से खाता देखें</button>
+            </a>
+        </div>
+    </div>
+
+    <div class="section">
+        <h1>नाम से खाता देखें</h1>
+        <div class="card">
+            <a href="{% url 'monthwise_report' %}">
+                <button class="utton" type="button">पिछले महीने का रिपोर्ट देखें</button>
+            </a>
+        </div>
+    </div>
+
+    <!-- Manage Transactions Section -->
+    <div class="section">
+        <h1>खाता संभाले</h1>
+        <div class="card">
+            {% comment %} <label for="userRoleDropdown">रोल चुनें:</label> {% endcomment %}
+            <select id="userRoleDropdown" class="button">
+                <option value="">अपना रोल चुनें</option>
+                <option value="admin">मैं एडमिन हूं 💀</option>
+                <option value="manager">मैं मैनेजर हूं 💓</option>
+            </select>
+            <button class="button" type="button" onclick="redirectBasedOnRole()">आगे बढ़ें</button>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+        <script type="text/javascript">
+            function redirectBasedOnRole() {
+                const selectedRole = document.getElementById("userRoleDropdown").value;
+
+                if (selectedRole === "admin") {
+                    window.location.href = "/admin/";
+                } else if (selectedRole === "manager") {
+                    window.location.href = "{% url 'manager_login' %}";
+                } else {
+                    alert("Please select a role before proceeding.");
+                }
+            }
+        </script>        
+    </footer>
+</body>
+</html>

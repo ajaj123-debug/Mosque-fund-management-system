@@ -1,0 +1,140 @@
+{% comment %} <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>रिपोर्ट ऑफ {{ user }}</title>
+</head>
+<body>
+    <h1>रिपोर्ट ऑफ {{ user }}</h1>
+    <h2>अब तक दी गई कुल रकम: ₹{{ total_income }}</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>S.no.</th>
+                <th>नाम</th>
+                <th>राशि</th>
+                <th>तारीख</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for transaction in transactions %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ transaction.user.name }}</td>
+                <td>₹{{ transaction.amount }}</td>
+                <td>{{ transaction.date|date:"F j, Y" }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html> {% endcomment %}
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>रिपोर्ट ऑफ {{ user }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        h1, h2 {
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #005F73;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            table, th, td {
+                display: block;
+                width: 100%;
+            }
+
+            th {
+                display: none;
+            }
+
+            tr {
+                margin-bottom: 10px;
+                display: block;
+            }
+
+            td {
+                text-align: right;
+                padding-left: 50%;
+                position: relative;
+            }
+
+            td::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 0;
+                width: 45%;
+                padding-left: 10px;
+                font-weight: bold;
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>रिपोर्ट ऑफ {{ user }}</h1>
+    <h2>अब तक दी गई कुल रकम: ₹{{ total_income }}</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>S.no.</th>
+                <th>नाम</th>
+                <th>राशि</th>
+                <th>तारीख</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for transaction in transactions %}
+            <tr>
+                <td data-label="S.no.">{{ forloop.counter }}</td>
+                <td data-label="नाम">{{ transaction.user.name }}</td>
+                <td data-label="राशि">₹{{ transaction.amount }}</td>
+                <td data-label="तारीख">{{ transaction.date|date:"F j, Y" }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'home' %}">
+        <button type="button">Go to Home</button>
+    </a>
+</body>
+</html>

@@ -138,7 +138,7 @@ def home(request):
 
 
 
-def add_transaction(request):
+def 𓂅𓏲ָꮺഒꕤᨒ୨୧ꮺꔛ(request):
     if request.method == 'POST':
         form = TransactionForm(request.POST)
         deduction_form = DeductionForm(request.POST)
@@ -349,7 +349,7 @@ def manager_login(request):
 
         if user is not None and user.is_authenticated and user.is_staff:  # Assuming managers are staff
             login(request)
-            return redirect('add_transaction')  # Redirect to the add_transaction view
+            return redirect('𓂅𓏲ָꮺഒꕤᨒ୨୧ꮺꔛ')  # Redirect to the add_transaction view
         else:
             messages.error(request, 'Invalid username or password.')
 

@@ -3,7 +3,7 @@ from django.urls import path
 from community_fund import views
 from community_fund.views import *
 from community_fund.views import monthwise_report
-from community_fund.views import generate_report,activity,about
+from community_fund.views import generate_report
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.login, name='login'),

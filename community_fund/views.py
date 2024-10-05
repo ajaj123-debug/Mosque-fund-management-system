@@ -138,7 +138,7 @@ def home(request):
 
 
 
-def 𓂅𓏲ָꮺഒꕤᨒ୨୧ꮺꔛ(request):
+def add_transaction (request):
     if request.method == 'POST':
         form = TransactionForm(request.POST)
         deduction_form = DeductionForm(request.POST)

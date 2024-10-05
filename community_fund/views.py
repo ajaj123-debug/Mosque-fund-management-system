@@ -349,7 +349,7 @@ def manager_login(request):
 
         if user is not None and user.is_authenticated and user.is_staff:  # Assuming managers are staff
             login(request)
-            return redirect('𓂅𓏲ָꮺഒꕤᨒ୨୧ꮺꔛ')  # Redirect to the add_transaction view
+            return redirect('add_transaction')  # Redirect to the add_transaction view
         else:
             messages.error(request, 'Invalid username or password.')
 

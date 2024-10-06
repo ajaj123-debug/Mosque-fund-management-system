@@ -6,8 +6,7 @@ from django.utils import timezone
 
 class User(models.Model):
     name = models.CharField(max_length=100)
-    email = models.EmailField()
-    joined_date = models.DateTimeField(default=timezone.now)
+    # joined_date = models.DateTimeField(default=timezone.now)
     is_active = models.BooleanField(default=True)
 
     def __str__(self):

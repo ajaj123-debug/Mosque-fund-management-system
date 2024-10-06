@@ -45,7 +45,7 @@ normal_users = {
     "Manjur Alam", "Sultan Ansari", "Makbul Ansari", "Najakat Ali", "Yunus Ansari",
     "Muslim Ansari", "Mustakim Ansari", "Barkat Ali", "Abdul Hasan", "Shamsad Ansari",
     "Aslam Ansari", "Wajif Ansari", "Azad Ansari", "Israel Ansari", "Kamal Ansari",
-    "Haidar Ansari", "Najrul Ansari", "Arman Ansari", "Shakeel Ansari", "Hanif Ansari",
+    "Haidar Ansari", "Najrul Ansari", "Arman Ansari", "Shakeel Ansari", "Hanif Ansari","Md Shahid",
     "Afzal Punjab"
 }
 

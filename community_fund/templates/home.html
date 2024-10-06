@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +7,17 @@
     <title>Masjid Fund Itwa</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
+        /* Global box-sizing to include padding and borders in element widths */
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Reset margin and padding */
+        body, html {
+            margin: 0;
+            padding: 0;
+        }
+
         body {
             font-family: 'Roboto', sans-serif;
             background: #f5f5f5;
@@ -17,14 +29,16 @@
             align-items: center;
             min-height: 100vh;
         }
+
         header {
             background: #005f73;
             color: white;
-            width: 100%;
+            width: 100%; /* Ensure full width */
             text-align: center;
             padding: 20px 0;
             border-radius: 0 0 20px 20px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin: 0; /* Remove any default margin */
         }
 
         header h1 {
@@ -140,6 +154,7 @@
             transform: translateY(-3px);
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
+
         .utton {
             background: #005f73;
             color: white;
@@ -193,7 +208,6 @@
         <h1>بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ</h1>
         <h1>Mosque Fund Dashboard</h1>
     </header>
-
     <!-- Savings Section -->
     <div class="section">
         <h1>बचत का खुलासा</h1>
@@ -201,7 +215,7 @@
             <!-- Left side with Current and Last Month's Savings stacked -->
             
             <div class="savings-right">
-                <div class="savings-card" style="width: 100%; height: 80%;">
+                <div class="savings-card" style="width: 100%; height: 94%;">
                     <h2>अब तक की कुल बचत +</h2>
                     <p><strong>₹{{ total_savings }}</strong></p>
                 </div>

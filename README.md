@@ -4,15 +4,15 @@
 
 **Table of Contents**
 
-Project Overview
-Features
-Tech Stack
-Installation
-Configuration
-Usage
-Folder Structure
-Contributing
-License
+---> Project Overview
+---> Features
+---> Tech Stack
+---> Installation
+---> Configuration
+---> Usage
+---> Folder Structure
+---> Contributing
+---> License
 
 
 **Project Overview**
@@ -28,32 +28,41 @@ Features
 **Savings Overview:**
 Displays total savings, current month’s savings, and previous month’s savings.
 
+
 **Expense Tracking:**
 Displays total deductions and a detailed list of current month's expenses.
+
 
 **Transaction History:**
 Shows recent transactions made to the mosque’s fund, including the donor's name, amount, and date.
 
+
 **Reports Generation:**
 Admins and Managers can generate user-based or monthly reports to review mosque financials in more detail.
+
 
 **Role Management:**
 Role selection for admin and manager with dynamic routing for different dashboard functionalities.
 
+
 **Responsive Design:**
 Fully responsive layout, works on mobile and web platforms.
 
+
 **Tech Stack**
 This project is built using the following technologies:
+
 
 **Frontend:**
 HTML5, CSS3 (inline styles)
 JavaScript (for form actions and role management)
 Responsive design for mobile and web
 
+
 **Backend:**
 Django (Python framework for managing data and routes)
 Jinja2 for templating (for dynamic HTML generation)
+
 
 **Database:**
 SQLite (or any other Django-supported database)
@@ -66,8 +75,10 @@ Follow these steps to install and set up the project locally:
 **Clone this repository:**
 >>git clone https://github.com/ajaj123-debug/Mosque-fund-management-system.git
 
+
 **Navigate to the project directory:**
 >>cd mosque-fund-dashboard
+
 
 **Create a virtual environment and activate it:**
 python -m venv venv
@@ -122,18 +133,19 @@ The system allows admins and managers to view, add, and update mosque savings an
 
 mosque-fund-dashboard/
 │
-├── mosque_fund/             # Main Django app
-│   ├── migrations/          # Database migrations
-│   ├── static/              # Static assets (CSS, JS, images)
-│   ├── templates/           # HTML templates
-│   ├── views.py             # Backend logic for routing
-│   └── urls.py              # URL routing
-├── manage.py                # Django management script
-├── db.sqlite3               # Default SQLite database (auto-generated)
-├── requirements.txt         # Python dependencies
-└── README.md                # This file
-Contributing
-We welcome contributions! Here's how you can help:
+├── mosque_fund/
+│   ├── migrations/
+│   ├── static/
+│   ├── templates/
+│   ├── views.py
+│   └── urls.py
+├── manage.py
+├── db.sqlite3
+├── requirements.txt
+└── README.md
+
+
+I heartfully welcome contributions! Here's how you can help:
 
 Fork the project.
 

@@ -1,4 +1,5 @@
-**Mosque Fund Management Dashboard**
+**Mosque Fund Management System**
+
 **MosqueMate** is a web-based application built to help manage and track mosque donations, expenses, and overall financial savings. The dashboard is designed to offer a clear and detailed breakdown of total savings, monthly savings, deductions, and recent transactions. It also offers user role management and the ability to generate reports for better fund management.
 
 **Table of Contents**

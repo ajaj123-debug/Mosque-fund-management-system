@@ -135,9 +135,15 @@ Contributing
 We welcome contributions! Here's how you can help:
 
 Fork the project.
+
 Create a new feature branch (git checkout -b feature-branch).
+
 Make your changes.
+
 Commit your changes (git commit -m 'Add some feature').
+
 Push to the branch (git push origin feature-branch).
+
 Create a new Pull Request.
-This project is copyrighted to owner of this repo the me the **ajaj **
+
+This project is copyrighted to owner of this repo the me the Ajaj

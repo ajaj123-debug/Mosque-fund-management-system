@@ -1,36 +1,18 @@
-from django.contrib.auth import authenticate, login
-from django.shortcuts import render, redirect
-from django.contrib import messages
-from django.shortcuts import render, redirect
-from django.utils import timezone
-from django.http import HttpResponse
-from django.template.loader import get_template
-from django.db.models import Sum
-from django.contrib import messages
-from django.contrib.auth import authenticate, login as auth_login
-from .models import Transaction, Deduction
-from .forms import TransactionForm, DeductionForm
-from PIL import Image, ImageDraw, ImageFont
-import datetime
-from django.http import HttpResponse
-from django.utils import timezone
-from django.db.models import Sum
-from django.template.loader import get_template
+import io,datetime
 from weasyprint import HTML
-import io
-from PIL import Image, ImageDraw, ImageFont
-from django.shortcuts import render
-from django.http import HttpResponse
+from calendar import monthrange
+from django.db.models import Sum
+from django.utils import timezone
 from .forms import UserReportForm
-from django.utils import timezone
-from django.db.models import Sum
-from calendar import monthrange
-from django.utils import timezone
-from django.db.models import Sum
-from calendar import monthrange
-from django.utils import timezone
-import datetime
-
+from django.contrib import messages
+from django.http import HttpResponse
+from .models import Transaction, Deduction
+from PIL import Image, ImageDraw, ImageFont
+from django.shortcuts import render, redirect
+from django.template.loader import get_template
+from .forms import TransactionForm, DeductionForm
+from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login as auth_login
 
 
 
@@ -45,8 +27,8 @@ normal_users = {
     "Manjur Alam", "Sultan Ansari", "Makbul Ansari", "Najakat Ali", "Yunus Ansari",
     "Muslim Ansari", "Mustakim Ansari", "Barkat Ali", "Abdul Hasan", "Shamsad Ansari",
     "Aslam Ansari", "Wajif Ansari", "Azad Ansari", "Israel Ansari", "Kamal Ansari",
-    "Haidar Ansari", "Najrul Ansari", "Arman Ansari", "Shakeel Ansari", "Hanif Ansari","Md Shahid",
-    "Afzal Punjab"
+    "Haidar Ansari", "Najrul Ansari", "Arman Ansari", "Shakeel Ansari", "Hanif Ansari",
+    "Afzal Ansari","Faruk Ansari","Md Shahid",
 }
 
 
@@ -414,200 +396,3 @@ def monthwise_report(request):
     }
 
     return render(request, 'monthwise_report.html', context)
-
-
-
-
-
-
-
-
-
-def index(request):
-    now = timezone.now()
-    total_savings = Transaction.objects.aggregate(total=Sum('amount'))['total'] or 0
-    # Get deductions for the current month
-    current_month_deductions = Deduction.objects.filter(
-        date__year=now.year,
-        date__month=now.month
-    ).aggregate(total=Sum('amount'))['total'] or 0
-    # Get total deductions
-    total_deductions = Deduction.objects.aggregate(total=Sum('amount'))['total'] or 0
-    # Calculate savings after deduction
-    net_total_savings = total_savings - total_deductions
-    current_month_savings = Transaction.objects.filter(
-        date__year=now.year,
-        date__month=now.month
-    ).aggregate(total=Sum('amount'))['total'] or 0
-    now = timezone.now()
-    current_month = now.month
-    current_year = now.year
-
-    # Calculate first and last day of the current month
-    first_day_of_current_month = datetime.date(current_year, current_month, 1)
-    last_day_of_current_month = datetime.date(current_year, current_month, monthrange(current_year, current_month)[1])
-
-    # Calculate first and last day of the previous month
-    first_day_of_previous_month = datetime.date(current_year, current_month - 1, 1) if current_month > 1 else datetime.date(current_year - 1, 12, 1)
-    # last_day_of_previous_month = datetime.date(current_year, current_month, 1) - datetime.timedelta(days=1)
-    last_day_of_previous_month = timezone.make_aware(datetime.datetime(current_year, current_month, 1) - datetime.timedelta(days=1))
-    
-    
-    # Fetch transactions and deductions for the current month
-    current_month_transactions = Transaction.objects.filter(date__range=[first_day_of_current_month, now])
-    # current_month_deductions = Deduction.objects.filter(date__range=[first_day_of_current_month, now])
-
-    # Apply current month deductions
-    current_month_savings_after_deduction = current_month_savings - current_month_deductions
-    # Get recent transactions
-    recent_transactions = Transaction.objects.order_by('-date')[:15]
-    # Fetch transactions and deductions for the previous month
-    previous_month_transactions = Transaction.objects.filter(date__range=[first_day_of_previous_month, last_day_of_previous_month])
-    previous_month_deductions = Deduction.objects.filter(date__range=[first_day_of_previous_month, last_day_of_previous_month])
-
-    # Calculate totals for previous month
-    total_income_previous = previous_month_transactions.aggregate(total=Sum('amount'))['total'] or 0
-    total_deductions_previous = previous_month_deductions.aggregate(total=Sum('amount'))['total'] or 0
-    total_savings_previous = total_income_previous - total_deductions_previous
-    context = {
-        'total_savings': net_total_savings,
-        'current_month_savings': current_month_savings_after_deduction,
-        'current_month_deductions': current_month_deductions,  # Current month deductions
-        'total_deductions': total_deductions,  # Total deductions till now
-        'recent_transactions': recent_transactions,
-        'deductions': Deduction.objects.all(),  # Fetch all deductions to display in the template
-        'total_savings_previous': total_savings_previous,
-    }
-    return render(request, 'index.html', context )
-
-
-
-
-
-
-
-
-def about(request):
-    
-    now = timezone.now()
-    total_savings = Transaction.objects.aggregate(total=Sum('amount'))['total'] or 0
-    # Get deductions for the current month
-    current_month_deductions = Deduction.objects.filter(
-        date__year=now.year,
-        date__month=now.month
-    ).aggregate(total=Sum('amount'))['total'] or 0
-    # Get total deductions
-    total_deductions = Deduction.objects.aggregate(total=Sum('amount'))['total'] or 0
-    # Calculate savings after deduction
-    net_total_savings = total_savings - total_deductions
-    current_month_savings = Transaction.objects.filter(
-        date__year=now.year,
-        date__month=now.month
-    ).aggregate(total=Sum('amount'))['total'] or 0
-    now = timezone.now()
-    current_month = now.month
-    current_year = now.year
-
-    # Calculate first and last day of the current month
-    first_day_of_current_month = datetime.date(current_year, current_month, 1)
-    last_day_of_current_month = datetime.date(current_year, current_month, monthrange(current_year, current_month)[1])
-
-    # Calculate first and last day of the previous month
-    first_day_of_previous_month = datetime.date(current_year, current_month - 1, 1) if current_month > 1 else datetime.date(current_year - 1, 12, 1)
-    # last_day_of_previous_month = datetime.date(current_year, current_month, 1) - datetime.timedelta(days=1)
-    last_day_of_previous_month = timezone.make_aware(datetime.datetime(current_year, current_month, 1) - datetime.timedelta(days=1))
-    
-    
-    # Fetch transactions and deductions for the current month
-    current_month_transactions = Transaction.objects.filter(date__range=[first_day_of_current_month, now])
-    # current_month_deductions = Deduction.objects.filter(date__range=[first_day_of_current_month, now])
-
-    # Apply current month deductions
-    current_month_savings_after_deduction = current_month_savings - current_month_deductions
-    # Get recent transactions
-    recent_transactions = Transaction.objects.order_by('-date')[:15]
-    # Fetch transactions and deductions for the previous month
-    previous_month_transactions = Transaction.objects.filter(date__range=[first_day_of_previous_month, last_day_of_previous_month])
-    previous_month_deductions = Deduction.objects.filter(date__range=[first_day_of_previous_month, last_day_of_previous_month])
-
-    # Calculate totals for previous month
-    total_income_previous = previous_month_transactions.aggregate(total=Sum('amount'))['total'] or 0
-    total_deductions_previous = previous_month_deductions.aggregate(total=Sum('amount'))['total'] or 0
-    total_savings_previous = total_income_previous - total_deductions_previous
-    context = {
-        'total_savings': net_total_savings,
-        'current_month_savings': current_month_savings_after_deduction,
-        'current_month_deductions': current_month_deductions,  # Current month deductions
-        'total_deductions': total_deductions,  # Total deductions till now
-        'recent_transactions': recent_transactions,
-        'deductions': Deduction.objects.all(),  # Fetch all deductions to display in the template
-        'total_savings_previous': total_savings_previous,
-    }
-    return render(request, 'about.html', context)
-
-
-
-
-
-
-
-def blog(request):
-    return render(request, 'blog.html')
-
-
-
-
-
-
-
-def activity(request):
-    return render(request, 'activity.html')
-
-
-
-
-
-
-
-
-def contact(request):
-    return render(request, 'contact.html')
-
-
-
-
-
-
-
-
-def event(request):
-    return render(request, 'event.html')
-
-
-
-
-
-
-
-
-def sermon(request):
-    return render(request, 'sermon.html')
-
-
-
-
-
-
-
-
-def testimonial(request):
-    return render(request, 'testimoinal.html')
-
-
-
-
-
-
-
-def team(request):
-    return render(request, 'team.html')

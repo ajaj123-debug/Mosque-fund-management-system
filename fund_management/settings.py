@@ -35,7 +35,7 @@ INSTALLED_APPS = [
 
 
 # Make sure to add this to ensure proper redirection after login
-LOGIN_URL = 'login'
+LOGIN_URL = '/manager/login/'
 # LOGIN_REDIRECT_URL = '/'
 
 MIDDLEWARE = [

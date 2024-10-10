@@ -13,7 +13,6 @@ from django.template.loader import get_template
 from .forms import TransactionForm, DeductionForm
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import authenticate, login as auth_login
-from django.contrib.auth.decorators import login_required
 
 
 
@@ -40,9 +39,8 @@ def login(request):
         if username in normal_users and password == '12345678': 
             return redirect('home')
         else:
-            return render(request, 'login.html', {'error_message': 'galat salat nahi chalega'})
+            return render(request, 'login.html', {'error_message': 'Invalid user credentials'})
     return render(request, 'login.html')
-
 
 
 
@@ -120,7 +118,7 @@ def home(request):
 
 
 
-@login_required
+
 def add_transaction (request):
     if request.method == 'POST':
         form = TransactionForm(request.POST)

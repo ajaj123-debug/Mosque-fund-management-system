@@ -188,7 +188,7 @@
     <div class="container">
         <!-- Add Transaction Card -->
         <div class="card">
-            <h2>Add Transaction</h2>
+            <h2>Add Transaction + </h2>
             <form method="POST">
                 {% csrf_token %}
                 {{ form.as_p }}
@@ -198,7 +198,7 @@
 
         <!-- Add Deduction Card -->
         <div class="card">
-            <h2>Add Deduction</h2>
+            <h2>Add Deduction - </h2>
             <form method="POST" action="{% url 'add_deduction' %}">
                 {% csrf_token %}
                 {{ deduction_form.as_p }}

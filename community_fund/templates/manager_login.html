@@ -94,10 +94,10 @@
         <form method="POST"action="{% url 'login' %}">
             {% csrf_token %}
             <input type="hidden" name="next" value="{{ request.GET.next|default:'/add_transaction/' }}">
-            <label for="username">Username:</label>
+            <label for="username">Username</label>
             <input type="text" id="username" name="username" placeholder="यूजरनेम डालें" required>
             <br>
-            <label for="password">Password:</label>
+            <label for="password">Password</label>
             <input type="password" id="password" name="password" placeholder="पासवर्ड डालें" required>
             <br>
             <button type="submit">Login</button>

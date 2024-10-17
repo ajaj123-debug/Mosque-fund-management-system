@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +8,11 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #00695c; /* Updated background color */
+            background-color: #2c3e50;
+            background-image: url("{% static 'avifg.avif' %}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -16,13 +21,14 @@
         }
 
         h2 {
-            color: white; /* Adjusted text color to contrast with the dark background */
+            color: black; /* Adjusted text color to contrast with the dark background */
             margin-bottom: 20px;
             text-align: center;
         }
 
         form {
             background-color: #ffffff;
+            background-color: rgba(255, 255, 255, 0.7);
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             padding: 20px;
@@ -84,15 +90,15 @@
 </head>
 <body>
     <div>
-        <h2>Manager Login</h2> <!-- Moved heading above the form -->
+        <h2>Secretary Login</h2> <!-- Moved heading above the form -->
         <form method="POST"action="{% url 'login' %}">
             {% csrf_token %}
             <input type="hidden" name="next" value="{{ request.GET.next|default:'/add_transaction/' }}">
             <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
+            <input type="text" id="username" name="username" placeholder="यूजरनेम डालें" required>
             <br>
             <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
+            <input type="password" id="password" name="password" placeholder="पासवर्ड डालें" required>
             <br>
             <button type="submit">Login</button>
         </form>

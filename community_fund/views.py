@@ -29,7 +29,7 @@ normal_users = {
     "Aslam Ansari", "Wajif Ansari", "Azad Ansari", "Israel Ansari", "Kamal Ansari",
     "Haidar Ansari", "Najrul Ansari", "Arman Ansari", "Shakeel Ansari", "Hanif Ansari",
     "Afzal Ansari","Faruk Ansari","Md Shahid","Asgar Ali","Ajaj Ali", "Rashid Ali", "Ashif Ali",
-    "Washim Ali","Sarfaraz Ali","Danish Nawaz","Raja Ali","Abid Ali","Hajir Hussain",
+    "Washim Ali","Sarfaraz Ali","Danish Nawaz","Raja Ali","Abid Ali","Hajir Hussain","Sabiha Khatoon",
 }
 
 

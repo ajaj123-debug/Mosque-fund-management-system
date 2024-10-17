@@ -273,7 +273,7 @@
                 <a href="#">Savings</a>
                 <a href="#">Deductions</a>
                 <a href="#">Reports</a>
-                <a href="#">Manage</a>
+                <a href="{% url 'add_transaction' %}">Manage</a>
             </div>
             <!-- Hamburger Icon for mobile view -->
             <button class="navbar-toggle" onclick="toggleNavbar()">☰</button>
@@ -324,7 +324,7 @@
             {% if deductions %}
                 <ul>
                     {% for deduction in deductions %}
-                        <li>{{ deduction.category }}: <strong>₹{{ deduction.amount }}</strong> on {{ deduction.date|date:"F j, Y" }}</li>
+                        <li>{{ deduction.category }}: <strong>₹{{ deduction.amount }}</strong> on {{ deduction.date|date:"F j, Y g:i A" }}</li>
                     {% endfor %}
                 </ul>
             {% else %}

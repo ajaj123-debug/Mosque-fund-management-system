@@ -6,126 +6,123 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Masjid Fund Login</title>
     <style>
-        /* Ensures that padding and borders are included in the element's total width and height */
+        /* Basic reset and styling */
         * {
             box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
-            font-family: 'Arial', sans-serif;
-            background: #2c3e50;
+            font-family: Arial, sans-serif;
+            background-color: #2c3e50;
+            background-image: url("{% static 'avifg.avif' %}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-            color: white;
-            padding: 10px; /* Small padding for better spacing on mobile */
+            padding: 10px;
         }
 
         .wrapper {
-            background: #34495e;
-            border-radius: 15px;
-            padding: 40px 20px;
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
-            width: 100%; 
-            max-width: 400px;
+            background-color: #ffffff;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            padding: 30px;
+            width: 100%;
+            max-width: 350px;
             text-align: center;
         }
 
         h1 {
+            color: black;
             margin-bottom: 20px;
-            font-size: 24px;
+            font-size: 22px;
         }
 
         .error-message {
-            background: #e74c3c;
-            color: white;
+            background-color: #e74c3c;
+            color: black;
             padding: 10px;
             border-radius: 5px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         label {
             display: block;
             text-align: left;
-            margin: 10px 0 5px;
-            font-size: 14px;
+            color: #555;
+            font-weight: bold;
+            margin-top: 10px;
         }
 
-        input {
+        input[type="text"],
+        input[type="password"] {
             width: 100%;
-            padding: 12px;
-            margin: 12px 0;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            transition: all 0.2s ease;
-            background: #ecf0f1;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #ecf0f1;
             color: #2c3e50;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
         }
 
         input:focus {
-            box-shadow: 0 0 10px rgba(41, 128, 185, 0.8);
+            border-color: #3498db;
             outline: none;
         }
 
         button {
             width: 100%;
-            background: linear-gradient(145deg, #3498db, #2980b9);
+            background-color: #3498db;
             color: white;
-            cursor: pointer;
-            border: none;
             padding: 12px;
-            margin: 20px 0 0;
-            border-radius: 8px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
             font-size: 16px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            transition: background 0.3s, transform 0.3s;
+            margin-top: 20px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
         }
 
         button:hover {
-            background: linear-gradient(145deg, #2980b9, #3498db);
+            background-color: #2980b9;
             transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
         }
 
-        /* Media queries for smaller devices */
+        /* Media queries for responsive adjustments */
         @media (max-width: 768px) {
             .wrapper {
-                padding: 30px 15px;
-            }
-
-            h1 {
-                font-size: 22px;
-            }
-
-            input {
-                padding: 10px;
-            }
-
-            button {
-                padding: 10px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .wrapper {
-                padding: 20px 10px;
+                padding: 20px;
             }
 
             h1 {
                 font-size: 20px;
             }
 
-            input {
-                padding: 8px;
+            button {
+                padding: 10px;
                 font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .wrapper {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 18px;
             }
 
             button {
-                padding: 10px;
                 font-size: 14px;
             }
         }
@@ -133,13 +130,12 @@
 </head>
 <body>
     <div class="wrapper">
-        <h1>Login</h1>
 
         {% if error_message %}
         <div class="error-message">{{ error_message }}</div>
         {% endif %}
-
         <form method="POST" action="">
+            <h1>आगे बढ़ने के लिए लॉगिन करें</h1>
             {% csrf_token %}
             <label for="username">Username</label>
             <input type="text" id="username" name="username" placeholder="यूजरनेम डालें" required>

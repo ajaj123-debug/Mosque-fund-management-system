@@ -12,7 +12,7 @@ from django.shortcuts import render, redirect
 from django.template.loader import get_template
 from .forms import TransactionForm, DeductionForm
 from django.contrib.auth import authenticate, login
-from django.contrib.auth import authenticate, login as auth_login
+from django.contrib.auth.decorators import login_required
 
 
 
@@ -28,7 +28,8 @@ normal_users = {
     "Muslim Ansari", "Mustakim Ansari", "Barkat Ali", "Abdul Hasan", "Shamsad Ansari",
     "Aslam Ansari", "Wajif Ansari", "Azad Ansari", "Israel Ansari", "Kamal Ansari",
     "Haidar Ansari", "Najrul Ansari", "Arman Ansari", "Shakeel Ansari", "Hanif Ansari",
-    "Afzal Ansari","Faruk Ansari","Md Shahid",
+    "Afzal Ansari","Faruk Ansari","Md Shahid","Asgar Ali","Ajaj Ali", "Rashid Ali", "Ashif Ali",
+    "Washim Ali","Sarfaraz Ali","Danish Nawaz","Raja Ali","Abid Ali","Hajir Hussain",
 }
 
 
@@ -118,7 +119,7 @@ def home(request):
 
 
 
-
+@login_required
 def add_transaction (request):
     if request.method == 'POST':
         form = TransactionForm(request.POST)

@@ -36,7 +36,8 @@ INSTALLED_APPS = [
 
 # Make sure to add this to ensure proper redirection after login
 LOGIN_URL = '/manager/login/'
-# LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = 'add_transaction/'
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

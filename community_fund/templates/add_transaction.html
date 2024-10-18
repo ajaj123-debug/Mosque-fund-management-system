@@ -3,185 +3,187 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>transactions</title>
+    <title>Transactions</title>
     <style>
         /* Basic Reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        /* Body Styling */
-        body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(to right, #e8f6ff, #f4f4f4);
-            color: #333;
-            padding: 20px;
-            line-height: 1.6;
-        }
+/* Body Styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to right, #f0e6f6, #f6f9fc);
+    color: #444;
+    padding: 20px;
+    line-height: 1.6;
+}
 
-        .container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: center;
-        }
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
 
-        .card {
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            padding: 20px;
-            width: 45%; /* Width of each card for landscape layout */
-            min-width: 300px;
-            margin-bottom: 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
+.card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    padding: 20px;
+    width: 45%;
+    min-width: 300px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
 
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
-        }
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
 
-        h1, h2 {
-            text-align: center;
-            color: #2980b9;
-            margin-bottom: 20px;
-            animation: fadeIn 1s ease-in-out;
-        }
+h1, h2 {
+    text-align: center;
+    color: #6a1b9a; /* Changed to a deep purple */
+    margin-bottom: 20px;
+    animation: fadeIn 1s ease-in-out;
+}
 
-        /* Form Elements Styling */
-        form {
-            margin-bottom: 20px;
-        }
+/* Form Elements Styling */
+form {
+    margin-bottom: 20px;
+}
 
-        label {
-            display: block;
-            margin: 10px 0 5px;
-            font-weight: bold;
-        }
+label {
+    display: block;
+    margin: 10px 0 5px;
+    font-weight: bold;
+}
 
-        input[type="text"], input[type="number"], select {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            transition: border-color 0.3s;
-        }
+input[type="text"], input[type="number"], select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    transition: border-color 0.3s;
+}
 
-        input[type="text"]:focus, input[type="number"]:focus, select:focus {
-            border-color: #2980b9;
-            outline: none;
-        }
+input[type="text"]:focus, input[type="number"]:focus, select:focus {
+    border-color: #6a1b9a; /* Deep purple for focus */
+    outline: none;
+}
 
-        button {
-            background-color: #2980b9;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            padding: 10px 15px;
-            font-size: 1em;
-            transition: background-color 0.3s, transform 0.3s;
-            width: 100%; /* Make buttons full width */
-        }
+button {
+    background-color: #6a1b9a; /* Deep purple for buttons */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 10px 15px;
+    font-size: 1em;
+    transition: background-color 0.3s, transform 0.3s;
+    width: 100%;
+}
 
-        button:hover {
-            background-color: #1a6a94;
-            transform: translateY(-2px);
-        }
+button:hover {
+    background-color: #53127d; /* Darker shade on hover */
+    transform: translateY(-2px);
+}
 
-        /* Radio Buttons */
-        .radio-group {
-            display: flex;
-            justify-content: center;
-            margin: 15px 0;
-        }
+/* Radio Buttons */
+.radio-group {
+    display: flex;
+    justify-content: center;
+    margin: 15px 0;
+}
 
-        .radio {
-            display: none;
-        }
+.radio {
+    display: none;
+}
 
-        .radio-label {
-            position: relative;
-            cursor: pointer;
-            padding-left: 35px;
-            font-size: 1em;
-            margin-right: 20px;
-            user-select: none;
-        }
+.radio-label {
+    position: relative;
+    cursor: pointer;
+    padding-left: 35px;
+    font-size: 1em;
+    margin-right: 20px;
+    user-select: none;
+}
 
-        .radio-label::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 20px;
-            height: 20px;
-            border: 2px solid #2980b9;
-            border-radius: 50%;
-            background: #fff;
-            transition: background 0.3s;
-        }
+.radio-label::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    border: 2px solid #6a1b9a;
+    border-radius: 50%;
+    background: #fff;
+    transition: background 0.3s;
+}
 
-        .radio:checked + .radio-label::before {
-            background: #2980b9;
-        }
+.radio:checked + .radio-label::before {
+    background: #6a1b9a;
+}
 
-        .footer {
-            text-align: center;
-        }
+.footer {
+    text-align: center;
+}
 
-        .footer a {
-            text-decoration: none;
-        }
+.footer a {
+    text-decoration: none;
+    color: #6a1b9a;
+}
 
-        /* Keyframes for Animations */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
+/* Keyframes for Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .container {
-                flex-direction: column;
-                align-items: center;
-            }
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+    }
 
-            .card {
-                width: 100%;
-                min-width: auto;
-            }
+    .card {
+        width: 100%;
+        min-width: auto;
+    }
 
-            h1, h2 {
-                font-size: 1.8em;
-            }
+    h1, h2 {
+        font-size: 1.8em;
+    }
 
-            button {
-                font-size: 0.9em;
-            }
-        }
+    button {
+        font-size: 0.9em;
+    }
+}
 
-        @media (max-width: 480px) {
-            h1, h2 {
-                font-size: 1.5em;
-            }
+@media (max-width: 480px) {
+    h1, h2 {
+        font-size: 1.5em;
+    }
 
-            button {
-                font-size: 0.8em;
-            }
-        }
+    button {
+        font-size: 0.8em;
+    }
+}
+
     </style>
 </head>
 <body>

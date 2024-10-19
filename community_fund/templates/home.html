@@ -150,7 +150,7 @@
         }
 
         .button:hover {
-            background: #80c3e8;
+            background: #0C1317;
             transform: translateY(-3px);
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
@@ -269,10 +269,10 @@
         <nav class="navbar">
             <div class="navbar-brand">Sunni Noori Jama Masjid</div>
             <div class="navbar-links" id="navbarLinks">
-                <a href="#">Home</a>
-                <a href="#">Savings</a>
-                <a href="#">Deductions</a>
-                <a href="#">Reports</a>
+                <a href="#">{% url 'home' %}</a>
+                <a href="#">{% url 'home' %}</a>
+                <a href="#">{% url 'home' %}</a>
+                <a href="{% url 'generate_user_report' %}">Reports</a>
                 <a href="{% url 'add_transaction' %}">Manage</a>
             </div>
             <!-- Hamburger Icon for mobile view -->

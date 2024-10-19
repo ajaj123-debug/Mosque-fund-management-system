@@ -260,6 +260,19 @@
                 display: block;
             }
         }
+        .card-clipart {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            width: 80px; /* Adjust size as needed */
+            height: auto; /* Maintain aspect ratio */
+            opacity: 0.8; /* Slight transparency if desired */
+            transform: rotate(4deg); /* Rotate the clipart by 45 degrees */
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+        .savings-card {
+            position: relative; /* Ensure the clipart is positioned relative to the card */
+        }
         
     </style>
 </head>
@@ -300,6 +313,7 @@
                 <div class="savings-card">
                     <h2>मौजूदा महीने की बचत +</h2>
                     <p><strong>₹{{ current_month_savings }}</strong></p>
+                    <img src="{% static 'clip.webp' %}" alt="Clipart" class="card-clipart">
                 </div>
                 <div class="savings-card">
                     <h2>पिछले महीने की बचत +</h2>

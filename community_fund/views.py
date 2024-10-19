@@ -333,7 +333,7 @@ def manager_login(request):
             login(request)
             return redirect('add_transaction')  # Redirect to the add_transaction view
         else:
-            messages.error(request, 'Allah se Daro')
+            messages.error(request, 'Invalid username or password.')
 
     return render(request, 'manager_login.html')
 

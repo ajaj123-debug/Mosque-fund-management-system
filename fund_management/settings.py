@@ -129,23 +129,8 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
-# import os
 
-# # Path where static files will be collected during `collectstatic`
-# # STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Ensure BASE_DIR is defined in your settings
 
-# STATIC_URL = '/static/'
-# STATICFILES_DIRS = [BASE_DIR / 'static']
-# import os
-
-# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, 'community_fund', 'static'),  # Update this line
-# ]
-
-# STATIC_URL = '/static/'
-# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
 # Default primary key field type

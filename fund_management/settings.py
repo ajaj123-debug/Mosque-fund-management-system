@@ -41,6 +41,7 @@ LOGIN_REDIRECT_URL = 'add_transaction/'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -149,3 +150,10 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'community_fund', 'static'),  # Static files for the community_fund app
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Location for collectstatic
+
+# Static files (CSS, JavaScript, Images)
+STATIC_URL = '/static/'
+
+if not DEBUG:  # Production settings
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'

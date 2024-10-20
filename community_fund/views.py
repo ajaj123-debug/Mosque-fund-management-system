@@ -396,3 +396,10 @@ def monthwise_report(request):
     }
 
     return render(request, 'monthwise_report.html', context)
+
+
+
+
+def index (request):
+    return render(request, 'index.html')
+    

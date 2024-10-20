@@ -1,5 +1,7 @@
 from pathlib import Path
 
+import dj_database_url
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -84,11 +86,12 @@ WSGI_APPLICATION = 'fund_management.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(
+        default='postgresql://test_db_qlhq_user:5GUrhDGuaxcpyvyAFWOTAaBfRScfLUCe@dpg-csaj3ki3esus739u4fb0-a:5432/test_db_qlhq',
+        conn_max_age=600
+    )
 }
+
 
 # from decouple import config
 # import dj_database_url

@@ -1,0 +1,243 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transactions</title>
+    <link rel="icon" type="image/jpg" href="{% static 'ah.jpg' %}">
+    <style>
+        /* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to right, #f6f9fc, #f6f9fc);
+    color: #444;
+    padding: 20px;
+    line-height: 1.6;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    padding: 20px;
+    width: 45%;
+    min-width: 300px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+h1, h2 {
+    text-align: center;
+    color: #0288d1; /* Changed to a deep purple */
+    margin-bottom: 20px;
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Form Elements Styling */
+form {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+    font-weight: bold;
+}
+
+input[type="text"], input[type="number"], select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus, input[type="number"]:focus, select:focus {
+    border-color: #0288d1; /* Deep purple for focus */
+    outline: none;
+}
+
+button {
+    background-color: #0288d1; /* Deep purple for buttons */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 10px 15px;
+    font-size: 1em;
+    transition: background-color 0.3s, transform 0.3s;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #0C1317; /* Darker shade on hover */
+    transform: translateY(-2px);
+}
+
+/* Radio Buttons */
+.radio-group {
+    display: flex;
+    justify-content: center;
+    margin: 15px 0;
+}
+
+.radio {
+    display: none;
+}
+
+.radio-label {
+    position: relative;
+    cursor: pointer;
+    padding-left: 35px;
+    font-size: 1em;
+    margin-right: 20px;
+    user-select: none;
+}
+
+.radio-label::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    border: 2px solid #0288d1;
+    border-radius: 50%;
+    background: #fff;
+    transition: background 0.3s;
+}
+
+.radio:checked + .radio-label::before {
+    background: #0288d1;
+}
+
+.footer {
+    text-align: center;
+}
+
+.footer a {
+    text-decoration: none;
+    color: #0288d1;
+}
+
+/* Keyframes for Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card {
+        width: 100%;
+        min-width: auto;
+    }
+
+    h1, h2 {
+        font-size: 1.8em;
+    }
+
+    button {
+        font-size: 0.9em;
+    }
+}
+
+@media (max-width: 480px) {
+    h1, h2 {
+        font-size: 1.5em;
+    }
+
+    button {
+        font-size: 0.8em;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Add Transaction Card -->
+        <div class="card">
+            <h2>Add Transaction + </h2>
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Add Transaction</button>
+            </form>
+        </div>
+
+        <!-- Add Deduction Card -->
+        <div class="card">
+            <h2>Add Deduction - </h2>
+            <form method="POST" action="{% url 'add_deduction' %}">
+                {% csrf_token %}
+                {{ deduction_form.as_p }}
+                <button type="submit">Add Deduction</button>
+            </form>
+        </div>
+
+        <!-- Return to Home Card -->
+        <div class="card">
+            <h2>Return to Home</h2>
+            <div class="footer">
+                <a href="{% url 'home' %}">
+                    <button type="button">Go to Home</button>
+                </a>
+                <h2>Generate Previous Month's Report</h2>
+                <a href="{% url 'monthwise_report' %}">
+                    <button type="button">Previous Month's Report</button>
+                </a>
+            </div>
+        </div>
+
+        <!-- Generate Report Card -->
+        <div class="card">
+            <h2>Generate Report for Current Month</h2>
+            <form method="GET" action="{% url 'generate_report' %}">
+                <div class="radio-group">
+                    <input type="radio" id="pdf" name="format" value="pdf" class="radio" checked>
+                    <label for="pdf" class="radio-label">PDF</label>
+                    
+                    <input type="radio" id="png" name="format" value="png" class="radio">
+                    <label for="png" class="radio-label">PNG</label>
+                </div>
+                <button type="submit">Generate Report</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

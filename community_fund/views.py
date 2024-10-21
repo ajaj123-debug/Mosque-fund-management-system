@@ -33,7 +33,17 @@ normal_users = {
 }
 
 
-def login(request):
+# def login(request):
+#     if request.method == 'POST':
+#         username = request.POST.get('username')
+#         password = request.POST.get('password')
+#         if username in normal_users and password == '12345678': 
+#             return redirect('home')
+#         else:
+#             return render(request, 'login.html', {'error_message': 'Invalid user credentials'})
+#     return render(request, 'login.html')
+
+def user_login(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -42,6 +52,7 @@ def login(request):
         else:
             return render(request, 'login.html', {'error_message': 'Invalid user credentials'})
     return render(request, 'login.html')
+
 
 
 
@@ -323,6 +334,10 @@ def generate_user_report(request):
 
 
 
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from django.contrib.auth import authenticate, login
+
 def manager_login(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -330,12 +345,15 @@ def manager_login(request):
         user = authenticate(request, username=username, password=password)
 
         if user is not None and user.is_authenticated and user.is_staff:  # Assuming managers are staff
-            login(request)
-            return redirect('add_transaction')  # Redirect to the add_transaction view
+            login(request, user)
+            # Redirect to the 'next' parameter if it exists, else default to 'add_transaction'
+            next_url = request.POST.get('next', 'add_transaction')
+            return redirect(next_url)
         else:
             messages.error(request, 'Invalid username or password.')
 
     return render(request, 'manager_login.html')
+
 
 
 

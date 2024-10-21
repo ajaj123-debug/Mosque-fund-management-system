@@ -91,7 +91,7 @@
 </head>
 <body>
     <div>
-        <h2>Secretary Login</h2> <!-- Moved heading above the form -->
+        <h2>Manager Login</h2> <!-- Moved heading above the form -->
         <form method="POST" action ="{% url 'manager_login' %}">
             {% csrf_token %}
             <input type="hidden" name="next" value="{{ request.GET.next|default:'/add_transaction/' }}">

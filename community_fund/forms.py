@@ -18,6 +18,6 @@ class TransactionForm(forms.ModelForm):
             'amount': forms.NumberInput(attrs={'step': '1', 'min': '0'}),
         }
 class UserReportForm(forms.Form):
-    user = forms.ModelChoiceField(queryset=User.objects.all(),label="नाम चुनें", required=False)
+    user = forms.ModelChoiceField(queryset=User.objects.all(),label="Select Name", required=False)
     start_date = forms.DateField(widget=forms.SelectDateWidget(empty_label=("Year", "Month", "Day")), required=False)
     end_date = forms.DateField(widget=forms.SelectDateWidget(empty_label=("Year", "Month", "Day")), required=False)

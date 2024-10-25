@@ -474,3 +474,9 @@ def index(request):
         'total_savings_previous': total_savings_previous,
     }
     return render(request, 'index.html', context)
+
+def my_view(request):
+    if request.method == 'HEAD':
+        # Return an empty response with just headers
+        return HttpResponse(status=200)
+    # Handle other methods as usual

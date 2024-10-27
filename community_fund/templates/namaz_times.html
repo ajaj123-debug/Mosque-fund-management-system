@@ -25,6 +25,51 @@
         }
 
         .clock {
+            position: relative;
+            width: 250px;
+            height: 250px;
+            margin: 20px auto;
+            border: 8px solid #005F73;
+            border-radius: 50%;
+            background: white;
+        }
+
+        .hand {
+            position: absolute;
+            width: 50%;
+            background: #333;
+            top: 50%;
+            transform-origin: 100%;
+            transform: rotate(90deg);
+        }
+
+        .hour {
+            height: 6px;
+            background: #005F73;
+        }
+
+        .minute {
+            height: 4px;
+            background: #007B92;
+        }
+
+        .second {
+            height: 2px;
+            background: red;
+        }
+
+        .center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 10px;
+            height: 10px;
+            background: #333;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .digital-clock {
             text-align: center;
             font-size: 1.5rem;
             color: #333;
@@ -55,7 +100,12 @@
             h1 {
                 font-size: 1.5rem;
             }
-            
+
+            .clock {
+                width: 200px;
+                height: 200px;
+            }
+
             .namaz-table th, .namaz-table td {
                 padding: 8px;
                 font-size: 0.9rem;
@@ -63,39 +113,56 @@
         }
 
         @media (max-width: 480px) {
-            .namaz-table {
-                display: block;
-                width: 100%;
-            }
-
-            .namaz-table thead {
-                display: none; /* Hide the table header on mobile */
-            }
-
-            .namaz-table tbody {
-                display: flex;
-                flex-direction: column;
-                gap: 10px;
-            }
-
-            .namaz-table tr {
-                display: flex;
-                flex-direction: column;
-                border: 1px solid #ccc;
+            .container {
                 padding: 10px;
+            }
+
+            .clock {
+                width: 180px;
+                height: 180px;
+            }
+
+            .digital-clock {
+                font-size: 1.2rem;
+            }
+
+            h1 {
+                font-size: 1.2rem;
+            }
+
+            .namaz-table {
+                width: 100%;
+                margin-top: 10px;
+                border: none;
+            }
+
+            .namaz-table tbody tr {
+                display: flex;
+                justify-content: space-between;
+                padding: 5px 0;
+                border-bottom: 1px solid #ccc;
+            }
+
+            .namaz-table th, .namaz-table td {
+                padding: 5px;
+                font-size: 0.9rem;
+                text-align: left;
+                border: none;
+            }
+
+            .namaz-table th {
+                display: none;
             }
 
             .namaz-table td {
                 display: flex;
                 justify-content: space-between;
-                padding: 10px 0;
+                width: 100%;
             }
 
-            .namaz-table td::before {
-                content: attr(data-label);
+            .prayer-name {
                 font-weight: bold;
                 color: #005F73;
-                margin-right: 10px;
             }
         }
     </style>
@@ -103,25 +170,44 @@
 <body>
     <div class="container">
         <h1>Today's Namaz Times</h1>
-        <div class="clock" id="clock"></div>
+        <div class="clock">
+            <div class="hand hour" id="hour-hand"></div>
+            <div class="hand minute" id="minute-hand"></div>
+            <div class="hand second" id="second-hand"></div>
+            <div class="center"></div>
+        </div>
+        
+        <!-- Digital Clock Display -->
+        <div class="digital-clock" id="digital-clock"></div>
+
         {% if namaz_times %}
         <table class="namaz-table">
             <thead>
                 <tr>
-                    <th>Fajr</th>
-                    <th>Dhuhr</th>
-                    <th>Asr</th>
-                    <th>Maghrib</th>
-                    <th>Isha</th>
+                    <th>Prayer</th>
+                    <th>Time</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td data-label="Fajr">{{ namaz_times.fajr_time }}</td>
-                    <td data-label="Dhuhr">{{ namaz_times.dhuhr_time }}</td>
-                    <td data-label="Asr">{{ namaz_times.asr_time }}</td>
-                    <td data-label="Maghrib">{{ namaz_times.maghrib_time }}</td>
-                    <td data-label="Isha">{{ namaz_times.isha_time }}</td>
+                    <td class="prayer-name">Fajr</td>
+                    <td>{{ namaz_times.fajr_time }}</td>
+                </tr>
+                <tr>
+                    <td class="prayer-name">Dhuhr</td>
+                    <td>{{ namaz_times.dhuhr_time }}</td>
+                </tr>
+                <tr>
+                    <td class="prayer-name">Asr</td>
+                    <td>{{ namaz_times.asr_time }}</td>
+                </tr>
+                <tr>
+                    <td class="prayer-name">Maghrib</td>
+                    <td>{{ namaz_times.maghrib_time }}</td>
+                </tr>
+                <tr>
+                    <td class="prayer-name">Isha</td>
+                    <td>{{ namaz_times.isha_time }}</td>
                 </tr>
             </tbody>
         </table>
@@ -131,23 +217,46 @@
     </div>
 
     <script>
-        // Function to display the current time
-        function updateClock() {
-            const clockElement = document.getElementById('clock');
+        function updateAnalogClock() {
+            const hourHand = document.getElementById('hour-hand');
+            const minuteHand = document.getElementById('minute-hand');
+            const secondHand = document.getElementById('second-hand');
+
             const now = new Date();
-            const hours = String(now.getHours()).padStart(2, '0');
-            const minutes = String(now.getMinutes()).padStart(2, '0');
-            const seconds = String(now.getSeconds()).padStart(2, '0');
-            const ampm = hours >= 12 ? 'PM' : 'AM';
-            const formattedTime = `${hours}:${minutes}:${seconds} ${ampm}`;
-            clockElement.textContent = formattedTime;
+            const seconds = now.getSeconds();
+            const minutes = now.getMinutes();
+            const hours = now.getHours();
+
+            // Calculate degrees for each hand
+            const secondDeg = ((seconds / 60) * 360) + 90;
+            const minuteDeg = ((minutes / 60) * 360) + ((seconds / 60) * 6) + 90;
+            const hourDeg = ((hours / 12) * 360) + ((minutes / 60) * 30) + 90;
+
+            // Apply rotation to hands
+            secondHand.style.transform = `rotate(${secondDeg}deg)`;
+            minuteHand.style.transform = `rotate(${minuteDeg}deg)`;
+            hourHand.style.transform = `rotate(${hourDeg}deg)`;
         }
 
-        // Update the clock every second
-        setInterval(updateClock, 1000);
+        function updateDigitalClock() {
+            const now = new Date();
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const seconds = now.getSeconds().toString().padStart(2, '0');
+            const formattedTime = `${hours}:${minutes}:${seconds}`;
 
-        // Initial call to set the time when the page loads
-        updateClock();
+            document.getElementById('digital-clock').textContent = formattedTime;
+        }
+
+        // Update the clocks every second
+        setInterval(() => {
+            updateAnalogClock();
+            updateDigitalClock();
+        }, 1000);
+
+        // Initial call to set the clock at the first load
+        updateAnalogClock();
+        updateDigitalClock();
     </script>
 </body>
 </html>

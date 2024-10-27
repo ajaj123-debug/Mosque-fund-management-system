@@ -7,7 +7,7 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('sardar/', admin.site.urls),
-    path('', views.user_login, name='login'),
+    path('login', views.user_login, name='loginn'),
     path('home/', views.home, name='home'),
     path('manager/login/', manager_login, name='manager_login'),
     path('login/', auth_views.LoginView.as_view(), name='login'),
@@ -17,4 +17,5 @@ urlpatterns = [
     path('generate_user_report/', views.generate_user_report, name='generate_user_report'),
     path('monthwise-report/', monthwise_report, name='monthwise_report'),
     path('namaz-times/', views.namaz_times_view, name='namaz_times'),
+    path('', views.index, name='index'),
 ]

@@ -33,15 +33,6 @@ normal_users = {
 }
 
 
-# def login(request):
-#     if request.method == 'POST':
-#         username = request.POST.get('username')
-#         password = request.POST.get('password')
-#         if username in normal_users and password == '12345678': 
-#             return redirect('home')
-#         else:
-#             return render(request, 'login.html', {'error_message': 'Invalid user credentials'})
-#     return render(request, 'login.html')
 
 def user_login(request):
     if request.method == 'POST':
@@ -52,10 +43,6 @@ def user_login(request):
         else:
             return render(request, 'login.html', {'error_message': 'Invalid user credentials'})
     return render(request, 'login.html')
-
-
-
-
 
 
 

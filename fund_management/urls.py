@@ -6,7 +6,7 @@ from community_fund.views import monthwise_report
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('sardar/', admin.site.urls),
     path('', views.user_login, name='login'),
     path('home/', views.home, name='home'),
     path('manager/login/', manager_login, name='manager_login'),

@@ -16,4 +16,5 @@ urlpatterns = [
     path('generate_report/', views.generate_report, name='generate_report'),
     path('generate_user_report/', views.generate_user_report, name='generate_user_report'),
     path('monthwise-report/', monthwise_report, name='monthwise_report'),
+    path('namaz-times/', views.namaz_times_view, name='namaz_times'),
 ]

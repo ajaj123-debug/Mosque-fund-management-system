@@ -467,3 +467,21 @@ def my_view(request):
         # Return an empty response with just headers
         return HttpResponse(status=200)
     # Handle other methods as usual
+    
+    
+    
+    
+    
+    
+    from django.shortcuts import render
+from .models import NamazTime
+from datetime import date
+
+def namaz_times_view(request):
+    today = date.today()
+    namaz_times = NamazTime.objects.filter(date=today).first()  # Fetch today's namaz times
+
+    context = {
+        'namaz_times': namaz_times,
+    }
+    return render(request, 'namaz_times.html', context)

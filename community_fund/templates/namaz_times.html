@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Namaz Times</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #005F73;
+            font-size: 1.8rem;
+        }
+
+        .clock {
+            text-align: center;
+            font-size: 1.5rem;
+            color: #333;
+            margin-top: 10px;
+        }
+
+        .namaz-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .namaz-table th,
+        .namaz-table td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: center;
+            font-size: 1rem;
+        }
+
+        .namaz-table th {
+            background-color: #005F73;
+            color: white;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            .namaz-table th, .namaz-table td {
+                padding: 8px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .namaz-table {
+                display: block;
+                width: 100%;
+            }
+
+            .namaz-table thead {
+                display: none; /* Hide the table header on mobile */
+            }
+
+            .namaz-table tbody {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .namaz-table tr {
+                display: flex;
+                flex-direction: column;
+                border: 1px solid #ccc;
+                padding: 10px;
+            }
+
+            .namaz-table td {
+                display: flex;
+                justify-content: space-between;
+                padding: 10px 0;
+            }
+
+            .namaz-table td::before {
+                content: attr(data-label);
+                font-weight: bold;
+                color: #005F73;
+                margin-right: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Today's Namaz Times</h1>
+        <div class="clock" id="clock"></div>
+        {% if namaz_times %}
+        <table class="namaz-table">
+            <thead>
+                <tr>
+                    <th>Fajr</th>
+                    <th>Dhuhr</th>
+                    <th>Asr</th>
+                    <th>Maghrib</th>
+                    <th>Isha</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td data-label="Fajr">{{ namaz_times.fajr_time }}</td>
+                    <td data-label="Dhuhr">{{ namaz_times.dhuhr_time }}</td>
+                    <td data-label="Asr">{{ namaz_times.asr_time }}</td>
+                    <td data-label="Maghrib">{{ namaz_times.maghrib_time }}</td>
+                    <td data-label="Isha">{{ namaz_times.isha_time }}</td>
+                </tr>
+            </tbody>
+        </table>
+        {% else %}
+        <p style="text-align: center;">No namaz times available for today.</p>
+        {% endif %}
+    </div>
+
+    <script>
+        // Function to display the current time
+        function updateClock() {
+            const clockElement = document.getElementById('clock');
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            const ampm = hours >= 12 ? 'PM' : 'AM';
+            const formattedTime = `${hours}:${minutes}:${seconds} ${ampm}`;
+            clockElement.textContent = formattedTime;
+        }
+
+        // Update the clock every second
+        setInterval(updateClock, 1000);
+
+        // Initial call to set the time when the page loads
+        updateClock();
+    </script>
+</body>
+</html>

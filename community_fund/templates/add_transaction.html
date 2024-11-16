@@ -8,184 +8,476 @@
     <link rel="icon" type="image/jpg" href="{% static 'aha.jpg' %}">
     <style>
         /* Basic Reset */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-/* Body Styling */
-body {
-    font-family: 'Arial', sans-serif;
-    background: linear-gradient(to right, #f6f9fc, #f6f9fc);
-    color: #444;
-    padding: 20px;
-    line-height: 1.6;
-}
+        /* Body Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background: url("{% static 'a.avif' %}") no-repeat center center fixed;
+            background-size: cover; /* Adjust the image to cover the entire viewport */
+            color: #fff;
+            padding: 20px;
+            line-height: 1.6;
+        }
 
-.container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-}
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
 
-.card {
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-    padding: 20px;
-    width: 45%;
-    min-width: 300px;
-    margin-bottom: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    transition: transform 0.3s, box-shadow 0.3s;
-}
+        .card {
+            backdrop-filter: blur(15px); /* Glass effect */
+            background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+            border-radius: 15px;
+            box-shadow: inset 0 0 4px rgba(0, 55, 55, 0.9); /* Glow effect from inside */
+            padding: 20px;
+            width: 45%;
+            min-width: 300px;
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
 
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-}
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5); /* Enhanced glow on hover */
+        }
 
-h1, h2 {
-    text-align: center;
-    color: #0288d1; /* Changed to a deep purple */
-    margin-bottom: 20px;
-    animation: fadeIn 1s ease-in-out;
-}
+        h1, h2 {
+            text-align: center;
+            color: #333333; /* Light cyan color for headers */
+            margin-bottom: 20px;
+            animation: fadeIn 1s ease-in-out;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
 
-/* Form Elements Styling */
-form {
-    margin-bottom: 20px;
-}
+        /* Form Elements Styling */
+        form {
+            margin-bottom: 20px;
+        }
 
-label {
-    display: block;
-    margin: 10px 0 5px;
-    font-weight: bold;
-}
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
 
-input[type="text"], input[type="number"], select {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    transition: border-color 0.3s;
-}
+        input[type="text"], input[type="number"], select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            transition: border-color 0.3s;
+        }
 
-input[type="text"]:focus, input[type="number"]:focus, select:focus {
-    border-color: #0288d1; /* Deep purple for focus */
-    outline: none;
-}
+        input[type="text"]:focus, input[type="number"]:focus, select:focus {
+            border-color: #E0F7FA;
+            outline: none;
+        }
 
-button {
-    background-color: #0288d1; /* Deep purple for buttons */
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    padding: 10px 15px;
-    font-size: 1em;
-    transition: background-color 0.3s, transform 0.3s;
-    width: 100%;
-}
+        button {
+            background-color: black; /* Modern cyan color for buttons */
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            padding: 12px 15px;
+            font-size: 1em;
+            transition: background-color 0.3s, transform 0.3s;
+            width: 100%;
+        }
 
-button:hover {
-    background-color: #0C1317; /* Darker shade on hover */
-    transform: translateY(-2px);
-}
+        button:hover {
+            background-color: #00811F; /* Darker shade on hover */
+            transform: translateY(-2px);
+        }
 
-/* Radio Buttons */
-.radio-group {
-    display: flex;
-    justify-content: center;
-    margin: 15px 0;
-}
+        /* Radio Buttons */
+        .radio-group {
+            display: flex;
+            justify-content: center;
+            margin: 15px 0;
+        }
 
-.radio {
-    display: none;
-}
+        .radio {
+            display: none;
+        }
 
-.radio-label {
-    position: relative;
-    cursor: pointer;
-    padding-left: 35px;
-    font-size: 1em;
-    margin-right: 20px;
-    user-select: none;
-}
+        .radio-label {
+            position: relative;
+            cursor: pointer;
+            padding-left: 35px;
+            font-size: 1em;
+            margin-right: 20px;
+            user-select: none;
+            color: #E0F7FA;
+        }
+        footer {
+            margin-top: auto;
+            padding: 20px;
+            text-align: center;
+            background-color: #0288d1;
+            color: white;
+            width: 100%;
+            border-radius: 20px 20px 0 0;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+        }
 
-.radio-label::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 20px;
-    height: 20px;
-    border: 2px solid #0288d1;
-    border-radius: 50%;
-    background: #fff;
-    transition: background 0.3s;
-}
+        .radio-label::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            border: 2px solid #00ACC1;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            transition: background 0.3s;
+        }
 
-.radio:checked + .radio-label::before {
-    background: #0288d1;
-}
+        .radio:checked + .radio-label::before {
+            background: #00ACC1;
+        }
 
-.footer {
-    text-align: center;
-}
+        .footer {
+            text-align: center;
+        }
 
-.footer a {
-    text-decoration: none;
-    color: #0288d1;
-}
+        .footer a {
+            text-decoration: none;
+            color: #00ACC1;
+        }
 
-/* Keyframes for Animations */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
+        /* Keyframes for Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    .container {
-        flex-direction: column;
-        align-items: center;
-    }
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+            }
 
-    .card {
-        width: 100%;
-        min-width: auto;
-    }
+            .card {
+                width: 100%;
+                min-width: auto;
+            }
 
-    h1, h2 {
-        font-size: 1.8em;
-    }
+            h1, h2 {
+                font-size: 1.8em;
+            }
 
-    button {
-        font-size: 0.9em;
-    }
-}
+            button {
+                font-size: 0.9em;
+            }
+        }
 
-@media (max-width: 480px) {
-    h1, h2 {
-        font-size: 1.5em;
-    }
+        @media (max-width: 480px) {
+            h1, h2 {
+                font-size: 1.5em;
+            }
 
-    button {
-        font-size: 0.8em;
-    }
-}
+            button {
+                font-size: 0.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Add Transaction Card -->
+        <div class="card">
+            <h2>Add Transaction + </h2>
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Add Transaction</button>
+            </form>
+        </div>
 
+        <!-- Add Deduction Card -->
+        <div class="card">
+            <h2>Add Deduction - </h2>
+            <form method="POST" action="{% url 'add_deduction' %}">
+                {% csrf_token %}
+                {{ deduction_form.as_p }}
+                <button type="submit">Add Deduction</button>
+            </form>
+        </div>
+
+        <!-- Return to Home Card -->
+        <div class="card">
+            <h2>Return to Home</h2>
+            <div class="footer">
+                <a href="{% url 'home' %}">
+                    <button type="button">Go to Home</button>
+                </a>
+                <h2>Generate Previous Month's Report</h2>
+                <a href="{% url 'monthwise_report' %}">
+                    <button type="button">Previous Month's Report</button>
+                </a>
+            </div>
+        </div>
+
+        <!-- Generate Report Card -->
+        <div class="card">
+            <h2>Generate Report for Current Month</h2>
+            <form method="GET" action="{% url 'generate_report' %}">
+                <div class="radio-group">
+                    <input type="radio" id="pdf" name="format" value="pdf" class="radio" checked>
+                    <label for="pdf" class="radio-label">PDF</label>
+                    
+                    <input type="radio" id="png" name="format" value="png" class="radio">
+                    <label for="png" class="radio-label">PNG</label>
+                </div>
+                <button type="submit">Generate Report</button>
+            </form>
+        </div>
+    </div>
+    <!-- Footer Section -->
+    <footer>
+        <p>© 2024 Masjid Fund Itwa. All rights reserved.</p>
+        <p>With ❤️ developed by Ajaj Abbas Ali</p>
+    </footer>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% comment %} {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transactions</title>
+    <link rel="icon" type="image/jpg" href="{% static 'aha.jpg' %}">
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #0F2027, #203A43, #2C5364); /* Dark gradient background */
+            color: #fff;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .card {
+            backdrop-filter: blur(15px); /* Glass effect */
+            background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            width: 45%;
+            min-width: 300px;
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #E0F7FA; /* Light cyan color for headers */
+            margin-bottom: 20px;
+            animation: fadeIn 1s ease-in-out;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        /* Form Elements Styling */
+        form {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"], input[type="number"], select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus, input[type="number"]:focus, select:focus {
+            border-color: #E0F7FA;
+            outline: none;
+        }
+
+        button {
+            background-color: Black; /* Modern cyan color for buttons */
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            padding: 12px 15px;
+            font-size: 1em;
+            transition: background-color 0.3s, transform 0.3s;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #00811F; /* Darker shade on hover */
+            transform: translateY(-2px);
+        }
+
+        /* Radio Buttons */
+        .radio-group {
+            display: flex;
+            justify-content: center;
+            margin: 15px 0;
+        }
+
+        .radio {
+            display: none;
+        }
+
+        .radio-label {
+            position: relative;
+            cursor: pointer;
+            padding-left: 35px;
+            font-size: 1em;
+            margin-right: 20px;
+            user-select: none;
+            color: #E0F7FA;
+        }
+
+        .radio-label::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            border: 2px solid #00ACC1;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            transition: background 0.3s;
+        }
+
+        .radio:checked + .radio-label::before {
+            background: #00ACC1;
+        }
+
+        .footer {
+            text-align: center;
+        }
+
+        .footer a {
+            text-decoration: none;
+            color: #00ACC1;
+        }
+
+        /* Keyframes for Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .card {
+                width: 100%;
+                min-width: auto;
+            }
+
+            h1, h2 {
+                font-size: 1.8em;
+            }
+
+            button {
+                font-size: 0.9em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1, h2 {
+                font-size: 1.5em;
+            }
+
+            button {
+                font-size: 0.8em;
+            }
+        }
     </style>
 </head>
 <body>
@@ -240,4 +532,4 @@ button:hover {
         </div>
     </div>
 </body>
-</html>
+</html> {% endcomment %}

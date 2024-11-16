@@ -49,17 +49,16 @@
                     <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
                         <div class="navbar-nav ms-lg-auto mx-xl-auto">
                             <a href="#" class="nav-item nav-link active">Home</a>
-                            <a href="#" class="nav-item nav-link">About</a>
+                            <a href="{% url 'namaz_times' %}" class="nav-item nav-link">Time-table</a>
                             <a href="#" class="nav-item nav-link">Activities</a>
                             <a href="#" class="nav-item nav-link">Events</a>
-                            <a href="#" class="nav-item nav-link">Sermons</a>
+                            <a href="{% url 'add_transaction' %}" class="nav-item nav-link">खाता संभाले</a>
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                                 <div class="dropdown-menu m-0 rounded-0">
                                     <a href="" class="dropdown-item">Latest Blog</a>
                                     <a href="" class="dropdown-item">Our Team</a>
                                     <a href="" class="dropdown-item">Testimonial</a>
-                                    <a href="" class="dropdown-item">404 Page</a>
                                 </div>
                             </div>
                             <a href="" class="nav-item nav-link">Contact</a>
@@ -79,7 +78,7 @@
                     <div class="col-lg-7">
                         <div class="hero-header-inner animated zoomIn">
                             <p class="fs-4 text-dark">Sunni Noori Jama Masjid</p>
-                            <h1 class="display-1 mb-5 text-dark">Purity Comes From Faith</h1>
+                            <h1 class="display-1 mb-5 text-dark">Peace Flows from Faith</h1>
                             <a href="{% url 'loginn' %}" class="btn btn-primary py-3 px-5">Dashboard</a>
                         </div>
                     </div>
@@ -134,7 +133,7 @@
                                     <img src="static/img/about-child.jpg" class="img-fluid rounded-circle" alt="">
                                 </div>
                                 <div class="col-6">
-                                    <p class="mb-0">At Masjid Al-Noor, we raise funds to maintain and expand our facilities, ensuring a welcoming place for worship, education, and community gatherings. Your contributions enable us to continue our charitable initiatives and offer crucial services.</p>
+                                    <p class="mb-0">मस्जिद अल-नूर में हमारी तामीर और वसीअ मकासद के लिए फंड इकट्ठा किया जाता है, जिससे इबादत, तालीम और कम्युनिटी की जमाव की सहूलतें फराहम की जा सकें। आपका इमदाद हमारे चैरिटी के मन्सूबों और अहम खिदमात को जारी रखने में मददगार साबित होता है।</p>
                                 </div>
                                 <div class="col-3">
                                         <h2 class="mb-0 text-primary text-center">₹{{ total_savings }}</h2>
@@ -260,7 +259,7 @@
                     <div class="col-9 col-lg-6 border-start border-dark pb-5">
                         <div class="ms-3">
                             <h4 class="mb-3">Milad Un Nabi</h4>
-                            <p class="mb-4">Join us in commemorating the birth of Prophet Muhammad (PBUH) at our Milad Un Nabi event. Celebrate this blessed occasion by reflecting on the life of the Prophet, participating in prayers, and spreading his message of peace and mercy.</p>
+                            <p class="mb-4">मीलादुन्नबी हमारे मीलादुन्नबी इवेंट में शिरकत करें। इस मुबारक मौके पर नबी-ए-करीम (ﷺ) की ज़िन्दगी पर गौर करें, दुआओं में शामिल हों और उनकी अमन और रहमत का पेग़ाम फैलाएं।</p>
                             <a href="#" class="btn btn-primary px-3">Join Now</a>
                         </div>
                     </div>
@@ -280,7 +279,7 @@
                     <div class="col-9 col-lg-6 border-start border-dark pb-5">
                         <div class="ms-3">
                             <h4 class="mb-3">Eid Ul Fitr</h4>
-                            <p class="mb-4">Celebrate the conclusion of Ramadan with Eid Ul Fitr, a day of joy, gratitude, and giving. Experience the essence of this special day with prayers, community gatherings, and charitable acts, symbolizing unity and compassion.</p>
+                            <p class="mb-4">ईद-उल-फितर रमज़ान के इख्तिताम पर ईद-उल-फितर का जश्न मनाएं, जो खुशी, शुक्र और इमदाद का दिन है। इस खास दिन का तजर्बा नमाज, कम्युनिटी के साथ मिल कर और खैरात के ज़रिए करें, जो एकता और रहमदिली की अलामत है।</p>
                             <a href="#" class="btn btn-primary px-3">Join Now</a>
                         </div>
                     </div>
@@ -325,12 +324,12 @@
                         <div class="blog-item wow fadeIn" data-wow-delay="0.1s">
                             <div class="blog-img position-relative overflow-hidden">
                                 <img src="static/img/blog-1.jpg" class="img-fluid w-100" alt="">
-                                <div class="bg-primary d-inline px-3 py-2 text-center text-white position-absolute top-0 end-0">01 Jan 2025</div>
+                                <div class="bg-primary d-inline px-3 py-2 text-center text-white position-absolute top-0 end-0">29 Sep 2024</div>
                             </div>
                             <div class="p-4">
                                 <div class="blog-meta d-flex justify-content-between pb-2">
                                     <div class="">
-                                        <small><i class="fas fa-user me-2 text-muted"></i><a href="" class="text-muted me-2">By Admin</small></a>
+                                        <small><i class="fas fa-user me-2 text-muted"></i><a href="https://www.instagram.com/ajaj_x_ajaj?igsh=MXhxcnIzd3BvbHo4Mg==" class="text-muted me-2">By Admin</small></a>
                                         <small><i class="fa fa-comment-alt me-2 text-muted"></i><a href="" class="text-muted me-2">12 Comments</small></a>
                                     </div>
                                     <div class="">
@@ -339,7 +338,7 @@
                                 </div>
                                 <a href="" class="d-inline-block h4 lh-sm mb-3">Importance of “Piller” of Islam</a>
                                 <p class="mb-4">The Five Pillars of Islam are the foundation of a Muslim’s faith and practice. Learn about their significance in achieving spiritual fulfillment and maintaining a balanced life in accordance with Islamic teachings.</p>
-                                <a href="#" class="btn btn-primary px-3">More Details</a>
+                                <a href="https://www.quranreading.com/blog/importance-of-five-pillars-of-islam-with-benefits/" class="btn btn-primary px-3">More Details</a>
                             </div>
                         </div>
                     </div>
@@ -347,7 +346,7 @@
                         <div class="blog-item wow fadeIn" data-wow-delay="0.3s">
                             <div class="blog-img position-relative overflow-hidden">
                                 <img src="static/img/blog-2.jpg" class="img-fluid w-100" alt="">
-                                <div class="bg-primary d-inline px-3 py-2 text-center text-white position-absolute top-0 end-0">01 Jan 2025</div>
+                                <div class="bg-primary d-inline px-3 py-2 text-center text-white position-absolute top-0 end-0">01 Oct 2024</div>
                             </div>
                             <div class="p-4">
                                 <div class="blog-meta d-flex justify-content-between pb-2">
@@ -361,7 +360,7 @@
                                 </div>
                                 <a href="" class="d-inline-block h4 lh-sm mb-3">How to get closer to Allah</a>
                                 <p class="mb-4">In this series, explore practical steps and guidance on how to strengthen your connection with Allah. From understanding His attributes to engaging in acts of worship, discover ways to achieve spiritual growth and inner peace.</p>
-                                <a href="#" class="btn btn-primary px-3">More Details</a>
+                                <a href="https://salehaart.com/blogs/rebuild-your-faith/7-things-that-make-allah-happy" class="btn btn-primary px-3">More Details</a>
                             </div>
                         </div>
                     </div>
@@ -383,7 +382,7 @@
                                 </div>
                                 <a href="" class="d-inline-block h4 lh-sm mb-3">Importance of Hajj in Islam</a>
                                 <p class="mb-4">Hajj, the sacred pilgrimage to Mecca, is one of the most profound experiences in a Muslim’s life. Learn about its significance, the spiritual journey it entails, and the values it instills in a believer’s heart.</p>
-                                <a href="#" class="btn btn-primary px-3">More Details</a>
+                                <a href="https://www.quranexplorer.com/blog/events/The_Significance_of_Hajj_in_Islam" class="btn btn-primary px-3">More Details</a>
                             </div>
                         </div>
                     </div>
@@ -410,7 +409,7 @@
                         <div class="team-item wow fadeIn" data-wow-delay="0.1s">
                             <h1>Mohammad Faiyaz</h1>
                             <h5 class="fw-normal fst-italic text-primary mb-4">Imaam</h5>
-                            <p class="mb-4">Imaam Mohammad Faiyaz is the dedicated spiritual leader of Masjid Al-Noor. With deep knowledge of Islamic teachings and a passion for serving the community, he guides worshippers with wisdom, compassion, and a strong sense of duty. His efforts focus on uplifting the community and strengthening their connection to Islam.</p>
+                            <p class="mb-4">इमाम मोहम्मद फ़ैय्याज़ मस्जिद अल-नूर के मोहतरम रूहानी रहनुमा हैं। इस्लामी तालीमात में गहरी जानकारी और खिदमत-ए-खल्क का ज़ज़्बा रखते हुए, वो ईमानदारों की रहनुमाई हिकमत, रहमत और फर्ज़-शनासी के साथ करते हैं। उनकी कोशीशें कम्युनिटी को बेहतर बनाने और उनके इस्लाम से लगाव को मज़बूत करने पर मबनी हैं।</p>
                             <div class="team-icon d-flex pb-4 mb-4 border-bottom border-primary">
                                 <a class="btn btn-primary btn-lg-square me-2" href=""><i class="fab fa-facebook-f"></i></a>
                                 <a class="btn btn-primary btn-lg-square me-2" href=""><i class="fab fa-twitter"></i></a>
@@ -445,9 +444,9 @@
                                             <p class="text-dark">Developer</p>
                                             <div class="team-icon d-flex align-items-center justify-content-center">
                                                 <a class="btn btn-primary btn-sm-square me-2" href=""><i class="fab fa-facebook-f"></i></a>
-                                                <a class="btn btn-primary btn-sm-square me-2" href=""><i class="fab fa-twitter"></i></a>
-                                                <a href="#" class="btn btn-primary btn-sm-square me-2"><i class="fab fa-instagram"></i></a>
-                                                <a href="#" class="btn btn-primary btn-sm-square"><i class="fab fa-linkedin-in"></i></a>
+                                                <a class="btn btn-primary btn-sm-square me-2" href="https://x.com/technerd_ajaj?t=gfID9UzBK49dazl--mCfmg&s=09"><i class="fab fa-twitter"></i></a>
+                                                <a href="https://www.instagram.com/ajaj_x_ajaj?igsh=MXhxcnIzd3BvbHo4Mg==" class="btn btn-primary btn-sm-square me-2"><i class="fab fa-instagram"></i></a>
+                                                <a href="https://www.linkedin.com/in/ajaj-ali-01208725a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="btn btn-primary btn-sm-square"><i class="fab fa-linkedin-in"></i></a>
                                             </div>
                                         </div>
                                     </div>
@@ -484,7 +483,7 @@
                 <div class="row g-4 footer-inner">
                     <div class="col-md-6 col-lg-6 col-xl-3">
                         <div class="footer-item mt-5">
-                            <h4 class="text-light mb-4">Al noor <span class="text-primary">Mosque</span></h4>
+                            <h4 class="text-light mb-4">Masjid  <span class="text-primary">Al-Noor</span></h4>
                             <p class="mb-4 text-secondary">Masjid Al-Noor is more than just a place of worship; it’s a cornerstone of the community. We aim to be a source of hope, knowledge, and unity for all. Whether it’s through educational programs, spiritual gatherings, or charity drives, we are dedicated to making a positive impact. Join us in our mission.</p>
                             <a href="" class="btn btn-primary py-2 px-4">Donate Now</a>
                         </div>
@@ -523,19 +522,19 @@
                     </div>
                     <div class="col-md-6 col-lg-6 col-xl-3">
                         <div class="footer-item mt-5">
-                            <h4 class="text-light mb-4">Latest Post</h4>
+                            <h4 class="text-light mb-4">Latest Videos</h4>
                             <div class="d-flex border-bottom border-secondary py-4">
                                 <img src="static/img/blog-mini-1.jpg" class="img-fluid flex-shrink-0" alt="">
                                 <div class="ps-3">
-                                    <p class="mb-0 text-muted">01 Jan 2045</p>
-                                    <a href="" class="text-body">Lorem ipsum dolor sit amet elit eros vel</a>
+                                    <p class="mb-0 text-muted">01 Dec 2024</p>
+                                    <a href="https://www.youtube.com/watch?v=l8f-vOBxPSc" class="text-body">Quran Aur Hadees Ki Baatein</a>
                                 </div>
                             </div>
                             <div class="d-flex py-4">
                                 <img src="static/img/blog-mini-2.jpg" class="img-fluid flex-shrink-0" alt="">
                                 <div class="ps-3">
-                                    <p class="mb-0 text-muted">01 Jan 2045</p>
-                                    <a href="" class="text-body">Lorem ipsum dolor sit amet elit eros vel</a>
+                                    <p class="mb-0 text-muted">04 Nov 2024</p>
+                                    <a href="https://www.youtube.com/watch?v=t5cc-ynEuoQ&pp=ygUYYmFyZWx2aXlhdCBleHBvc2VkIG1pcmph" class="text-body">Barelviyat ki Khubiyan aur kamiyan</a>
                                 </div>
                             </div>
                         </div>
@@ -552,7 +551,7 @@
                         <!--/*** This template is free as long as you keep the below author’s credit link/attribution link/backlink. ***/-->
                         <!--/*** If you'd like to use the template without the below author’s credit link/attribution link/backlink, ***/-->
                         <!--/*** you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". ***/-->
-                        Designed By <a class="border-bottom" href="">Ajaj</a>
+                        Designed By <a class="border-bottom" href="">Ajaj A Ali</a>
                     </div>
                 </div>
             </div>

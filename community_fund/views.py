@@ -91,7 +91,7 @@ def home(request):
     # Apply current month deductions
     current_month_savings_after_deduction = current_month_savings - current_month_deductions
     # Get recent transactions
-    recent_transactions = Transaction.objects.order_by('-date')[:15]
+    recent_transactions = Transaction.objects.order_by('-date')[:40]
     # Fetch transactions and deductions for the previous month
     previous_month_transactions = Transaction.objects.filter(date__range=[first_day_of_previous_month, last_day_of_previous_month])
     previous_month_deductions = Deduction.objects.filter(date__range=[first_day_of_previous_month, last_day_of_previous_month])

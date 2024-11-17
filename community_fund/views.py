@@ -26,7 +26,7 @@ normal_users = {
     "Abbas", "Mumtaj", "Nasir", "Ahsan", "Safik", "Imteyaj",
     "Manjur", "Sultan", "Makbul", "Liyakat", "Yunus",
     "Muslim", "Mustakim", "Barkat", "Abdul Hasan", "Shamsad",
-    "Aslam", "Wajif", "Azad", "Israel", "Kamal",
+    "Aslam", "Wajif", "Azad", "Israel", "Kamal", "Itwa",
     "Haidar", "Najrul", "Arman", "Shakeel", "Hanif",
     "Afzal","Faruk","Shahid","Asgar","Ajaj", "Rashid", "Ashif",
     "Washim","Sarfaraz","Danish","Raja","Abid","Hajir","Sabiha","Sulman","Lie"
@@ -41,7 +41,7 @@ def user_login(request):
         if username in normal_users and password == '123': 
             return redirect('home')
         else:
-            return render(request, 'login.html', {'error_message': 'Invalid user credentials'})
+            return render(request, 'login.html', {'error_message': 'Username : Itwa Password : 123'})
     return render(request, 'login.html')
 
 

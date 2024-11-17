@@ -23,13 +23,13 @@ from django.contrib.auth.decorators import login_required
 
 
 normal_users = {
-    "Abbas M Ali", "Mumtaj Ali", "Nasir Ali", "Ahsan Ali", "Safik Ansari", "Imteyaj Ansari",
-    "Manjur Alam", "Sultan Ansari", "Makbul Ansari", "Najakat Ali", "Yunus Ansari",
-    "Muslim Ansari", "Mustakim Ansari", "Barkat Ali", "Abdul Hasan", "Shamsad Ansari",
-    "Aslam Ansari", "Wajif Ansari", "Azad Ansari", "Israel Ansari", "Kamal Ansari",
-    "Haidar Ansari", "Najrul Ansari", "Arman Ansari", "Shakeel Ansari", "Hanif Ansari",
-    "Afzal Ansari","Faruk Ansari","Md Shahid","Asgar Ali","Ajaj Ali", "Rashid Ali", "Ashif Ali",
-    "Washim Ali","Sarfaraz Ali","Danish Nawaz","Raja Ali","Abid Ali","Hajir Hussain","Sabiha Khatoon",
+    "Abbas", "Mumtaj", "Nasir", "Ahsan", "Safik", "Imteyaj",
+    "Manjur", "Sultan", "Makbul", "Liyakat", "Yunus",
+    "Muslim", "Mustakim", "Barkat", "Abdul Hasan", "Shamsad",
+    "Aslam", "Wajif", "Azad", "Israel", "Kamal",
+    "Haidar", "Najrul", "Arman", "Shakeel", "Hanif",
+    "Afzal","Faruk","Shahid","Asgar","Ajaj", "Rashid", "Ashif",
+    "Washim","Sarfaraz","Danish","Raja","Abid","Hajir","Sabiha","Sulman","Lie"
 }
 
 
@@ -38,7 +38,7 @@ def user_login(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
-        if username in normal_users and password == '12345678': 
+        if username in normal_users and password == '123': 
             return redirect('home')
         else:
             return render(request, 'login.html', {'error_message': 'Invalid user credentials'})

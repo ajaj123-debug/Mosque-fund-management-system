@@ -50,6 +50,25 @@
             transform: translateY(-5px);
             box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5); /* Enhanced glow on hover */
         }
+        .ard {
+            backdrop-filter: blur(15px); /* Glass effect */
+            background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+            border-radius: 15px;
+            box-shadow: inset 0 0 4px rgba(0, 55, 55, 0.9); /* Glow effect from inside */
+            padding: 20px;
+            width: 45%;
+            min-width: 300px;
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .ard:hover {
+            transform: translateY(-5px);
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5); /* Enhanced glow on hover */
+        }
 
         h1, h2 {
             text-align: center;
@@ -245,13 +264,26 @@
             <h2>Generate Report for Current Month</h2>
             <form method="GET" action="{% url 'generate_report' %}">
                 <div class="radio-group">
-                    <input type="radio" id="pdf" name="format" value="pdf" class="radio" checked>
-                    <label for="pdf" class="radio-label">PDF</label>
-                    
-                    <input type="radio" id="png" name="format" value="png" class="radio">
-                    <label for="png" class="radio-label">PNG</label>
+                    <input type="radio" id="pdf-current" name="format" value="pdf" class="radio">
+                    <label for="pdf-current" class="radio-label">PDF</label>
+                    <input type="radio" id="png-current" name="format" value="png" class="radio">
+                    <label for="png-current" class="radio-label">PNG</label>
                 </div>
-                <button type="submit">Generate Report</button>
+                <button type="submit">Generate Current Month Report</button>
+            </form>
+        </div>
+    
+        <!-- Second Card: Previous Month -->
+        <div class="card">
+            <h2>Generate Report for Previous Month</h2>
+            <form method="GET" action="{% url 'prreport' %}">
+                <div class="radio-group">
+                    <input type="radio" id="pdf-previous" name="format" value="pdf" class="radio">
+                    <label for="pdf-previous" class="radio-label">PDF</label>
+                    <input type="radio" id="png-previous" name="format" value="png" class="radio">
+                    <label for="png-previous" class="radio-label">PNG</label>
+                </div>
+                <button type="submit">Generate Previous Month Report</button>
             </form>
         </div>
     </div>

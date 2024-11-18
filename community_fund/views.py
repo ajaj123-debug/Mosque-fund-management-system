@@ -54,6 +54,40 @@ def user_login(request):
 
 
 
+
+
+
+
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from django.contrib.auth import authenticate, login
+
+def manager_login(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None and user.is_authenticated and user.is_staff:  # Assuming managers are staff
+            login(request, user)
+            # Redirect to the 'next' parameter if it exists, else default to 'add_transaction'
+            next_url = request.POST.get('next', 'add_transaction')
+            return redirect(next_url)
+        else:
+            messages.error(request, 'Invalid username or password.')
+
+    return render(request, 'manager_login.html')
+
+
+
+
+
+
+
+
+
+
+
 def home(request):
     now = timezone.now()
     total_savings = Transaction.objects.aggregate(total=Sum('amount'))['total'] or 0
@@ -321,25 +355,7 @@ def generate_user_report(request):
 
 
 
-from django.shortcuts import render, redirect
-from django.contrib import messages
-from django.contrib.auth import authenticate, login
 
-def manager_login(request):
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
-
-        if user is not None and user.is_authenticated and user.is_staff:  # Assuming managers are staff
-            login(request, user)
-            # Redirect to the 'next' parameter if it exists, else default to 'add_transaction'
-            next_url = request.POST.get('next', 'add_transaction')
-            return redirect(next_url)
-        else:
-            messages.error(request, 'Invalid username or password.')
-
-    return render(request, 'manager_login.html')
 
 
 
@@ -550,3 +566,104 @@ def index(request):
         'total_savings_previous': total_savings_previous,
     }
     return render(request, 'index.html', context)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def prreport(request):
+    now = timezone.now()
+    current_month = now.month
+    current_year = now.year
+    format = request.GET.get('format', 'pdf')  # Default to PDF
+
+    # Convert now to local timezone
+    if timezone.is_naive(now):
+        now = timezone.make_aware(now)
+    now = timezone.localtime(now)
+
+    # First and last day of the current month
+    first_day_of_current_month = datetime.date(current_year, current_month, 1)
+    last_day_of_current_month = datetime.date(current_year, current_month, monthrange(current_year, current_month)[1])
+
+    # First and last day of the previous month
+    if current_month == 1:  # Handle January
+        first_day_of_previous_month = datetime.date(current_year - 1, 12, 1)
+        last_day_of_previous_month = datetime.date(current_year - 1, 12, 31)
+    else:
+        first_day_of_previous_month = datetime.date(current_year, current_month - 1, 1)
+        last_day_of_previous_month = datetime.date(current_year, current_month, 1) - datetime.timedelta(days=1)
+
+    # Fetch transactions and deductions for the current and previous months
+    current_month_transactions = Transaction.objects.filter(date__range=[first_day_of_current_month, now])
+    current_month_deductions = Deduction.objects.filter(date__range=[first_day_of_current_month, now])
+    previous_month_transactions = Transaction.objects.filter(date__range=[first_day_of_previous_month, last_day_of_previous_month])
+    previous_month_deductions = Deduction.objects.filter(date__range=[first_day_of_previous_month, last_day_of_previous_month])
+
+    # Calculate totals for current month
+    total_income_current = current_month_transactions.aggregate(total=Sum('amount'))['total'] or 0
+    total_deductions_current = current_month_deductions.aggregate(total=Sum('amount'))['total'] or 0
+    total_savings_current = total_income_current - total_deductions_current
+
+    # Calculate totals for previous month
+    total_income_previous = previous_month_transactions.aggregate(total=Sum('amount'))['total'] or 0
+    total_deductions_previous = previous_month_deductions.aggregate(total=Sum('amount'))['total'] or 0
+    total_savings_previous = total_income_previous - total_deductions_previous
+
+    # Prepare data for the report
+    context = {
+        'previous_month_name': (now - datetime.timedelta(days=30)).strftime('%B'),
+        'transactions': previous_month_transactions,  # Use the appropriate queryset
+        'total_income_previous': total_income_previous,
+        'total_deductions_previous': total_deductions_previous,
+        'total_savings_previous': total_savings_previous,
+        'generation_time': now.strftime('%Y-%m-%d %H:%M:%S'),  # Add generation time
+    }
+
+    if format == 'pdf':
+        return prereport(context)
+    elif format == 'png':
+        return prereport(context)
+
+
+
+
+
+
+
+
+
+def prereport(context):
+    # Render HTML template
+    template = get_template('prreport.html')  # Use your HTML template for the PDF
+    html = template.render(context)
+
+    # Create PDF using WeasyPrint
+    pdf = HTML(string=html).write_pdf()
+
+    response = HttpResponse(pdf, content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="report_{}.pdf"'.format(context['previous_month_name'])
+    return response

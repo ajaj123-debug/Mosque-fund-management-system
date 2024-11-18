@@ -1,0 +1,90 @@
+{% load tz %}
+{{ transaction.date|localtime }}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report for {{ previous_month_name }}</title>
+    <link rel="icon" type="image/jpg" href="{% static 'aha.jpg' %}">
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        .summary {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 110px; /* Add margin to separate from table */
+        }
+        .timestamp {
+            font-size: 11px; /* Small font for timestamp */
+            text-align: right; /* Align to right */
+        }
+        .image-container img {
+            width: 80%; /* Make the image fill the entire container */
+            height: auto; /* Maintain aspect ratio */
+        }
+        .centered-text {
+            position: absolute;
+            top: -4px; /* Adjust as needed to move closer/farther from the top */
+            left: 50%; /* Center horizontally */
+            transform: translateX(-50%); /* Correct horizontal centering */
+            text-align: center; /* Ensure text alignment is centered */
+            font-size: 2rem; /* Adjust font size as needed */
+            margin: 0; /* Remove default margin */
+        }  
+    </style>
+</head>
+<body>
+    <h1 class="centered-text">بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ</h1><br></br>
+    <h1>Report for {{ previous_month_name }}</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>S.no.</th>
+                <th>Name</th>
+                <th>Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for transaction in transactions %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ transaction.user.name }}</td>
+                <td>₹{{ transaction.amount }}</td>
+            </tr>
+            {% endfor %}
+            {% comment %} {% for transaction in previous_month_transactions %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ transaction.user.name }}</td>
+                <td>₹{{ transaction.amount }}</td>
+            </tr>
+            {% endfor %} {% endcomment %}
+        </tbody>
+    </table>
+
+    <h2>Accounts</h2>
+    <div class="summary">
+        <div>
+            <p>Savings: ₹{{ total_income_previous }}</p>
+            <p>Expenses: ₹{{ total_deductions_previous }}</p>
+            <p>Savings: ₹{{ total_savings_previous }}</p>
+        </div>
+        <div class="timestamp">
+            <p>generated on : {{ generation_time }}</p>
+            <h6>This is electronically generated copy no need to be signed</h6>
+        </div>
+    </div>
+</body>
+</html>

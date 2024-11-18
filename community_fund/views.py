@@ -4,7 +4,6 @@ from weasyprint import HTML
 from calendar import monthrange
 from django.db.models import Sum
 from django.utils import timezone
-from fund_management import settings
 from .forms import UserReportForm
 from django.contrib import messages
 from django.http import HttpResponse
@@ -277,11 +276,6 @@ def generate_png_report(context):
     # Create a blank image for PNG (width, height)
     img = Image.new('RGB', (1000, 1400), color=(255, 255, 255))
     d = ImageDraw.Draw(img)
-    
-    # Path to the font file
-    font_path = os.path.join(settings.BASE_DIR, "static", "fonts", "arial.ttf")
-    font = ImageFont.truetype(font_path, 20)
-
     # Basic font setup
     font = ImageFont.truetype("arial.ttf", 20)
 

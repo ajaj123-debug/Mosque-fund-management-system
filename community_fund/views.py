@@ -154,6 +154,23 @@ def home(request):
 
 @login_required
 def add_transaction (request):
+    now = timezone.now()
+
+    # Ensure datetime is timezone-aware before using localtime
+    if timezone.is_naive(now):
+        now = timezone.make_aware(now)
+
+    now = timezone.localtime(now)  # Convert to the local timezone (Asia/Kolkata)
+
+    # Get first and last date of the current month
+    first_day_of_month = timezone.localtime(
+        timezone.make_aware(datetime.datetime(now.year, now.month, 1))
+    )
+    last_day_of_month = timezone.localtime(
+        timezone.make_aware(
+            datetime.datetime(now.year, now.month, monthrange(now.year, now.month)[1])
+        )
+    )
     if request.method == 'POST':
         form = TransactionForm(request.POST)
         deduction_form = DeductionForm(request.POST)
@@ -175,7 +192,10 @@ def add_transaction (request):
 
     return render(request, 'add_transaction.html', {
         'form': form,
-        'deduction_form': deduction_form
+        'deduction_form': deduction_form,
+        'month_name': now.strftime('%B'),
+        'previous_month_name': (now - datetime.timedelta(days=30)).strftime('%B'),
+        'previous_month_names': (now - datetime.timedelta(days=60)).strftime('%B')
         
     })
     

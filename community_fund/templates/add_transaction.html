@@ -261,7 +261,7 @@
 
         <!-- Generate Report Card -->
         <div class="card">
-            <h2>Generate Report for Current Month</h2>
+            <h2>Report for {{ month_name }}</h2>
             <form method="GET" action="{% url 'generate_report' %}">
                 <div class="radio-group">
                     <input type="radio" id="pdf-current" name="format" value="pdf" class="radio" checked>
@@ -269,13 +269,13 @@
                     <input type="radio" id="png-current" name="format" value="png" class="radio">
                     <label for="png-current" class="radio-label">PNG</label>
                 </div>
-                <button type="submit">Generate Current Month Report</button>
+                <button type="submit">Generate</button>
             </form>
         </div>
     
         <!-- Second Card: Previous Month -->
         <div class="card">
-            <h2>Generate Report for Last Month</h2>
+            <h2>Report for {{ previous_month_name }}</h2>
             <form method="GET" action="{% url 'prreport' %}">
                 <div class="radio-group">
                     <input type="radio" id="pdf-previous" name="format" value="pdf" class="radio"checked>
@@ -283,13 +283,13 @@
                     <input type="radio" id="png-previous" name="format" value="png" class="radio">
                     <label for="png-previous" class="radio-label">PNG</label>
                 </div>
-                <button type="submit">Generate Last Month Report</button>
+                <button type="submit">Generate</button>
             </form>
         </div>
 
         <!-- Second-to-Last Month Report Card -->
         <div class="card">
-            <h2>Generate Report for Second Last Month</h2>
+            <h2>Report for {{previous_month_names}}</h2>
             <form method="GET" action="{% url 'second_last_month_report' %}">
                 <div class="radio-group">
                     <input type="radio" id="pdf-second-last" name="format" value="pdf" class="radio"checked>
@@ -297,7 +297,7 @@
                     <input type="radio" id="png-second-last" name="format" value="png" class="radio">
                     <label for="png-second-last" class="radio-label">PNG</label>
                 </div>
-                <button type="submit">Generate Second Last Month Report</button>
+                <button type="submit">Generate</button>
             </form>
         </div>
 

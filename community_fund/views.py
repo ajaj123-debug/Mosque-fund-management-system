@@ -176,6 +176,7 @@ def add_transaction (request):
     return render(request, 'add_transaction.html', {
         'form': form,
         'deduction_form': deduction_form
+        
     })
     
     
@@ -667,3 +668,72 @@ def prereport(context):
     response = HttpResponse(pdf, content_type='application/pdf')
     response['Content-Disposition'] = 'attachment; filename="report_{}.pdf"'.format(context['previous_month_name'])
     return response
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+from dateutil.relativedelta import relativedelta
+
+def second_last_month_report(request):
+    now = timezone.now()
+    format = request.GET.get('format', 'pdf')  # Default to PDF
+
+    # Ensure now is timezone-aware and localized
+    if timezone.is_naive(now):
+        now = timezone.make_aware(now)
+    now = timezone.localtime(now)
+
+    # Calculate the second last month
+    second_last_month = now - relativedelta(months=2)
+    current_year = second_last_month.year
+    second_last_month_number = second_last_month.month
+
+    # Calculate first and last days of the second last month
+    first_day_of_second_last_month = datetime.date(current_year, second_last_month_number, 1)
+    last_day_of_second_last_month = first_day_of_second_last_month + relativedelta(months=1) - datetime.timedelta(days=1)
+
+    # Fetch transactions and deductions for the second last month
+    second_last_month_transactions = Transaction.objects.filter(
+        date__range=[first_day_of_second_last_month, last_day_of_second_last_month]
+    )
+    second_last_month_deductions = Deduction.objects.filter(
+        date__range=[first_day_of_second_last_month, last_day_of_second_last_month]
+    )
+
+    # Calculate totals for the second last month
+    total_income_second_last = second_last_month_transactions.aggregate(total=Sum('amount'))['total'] or 0
+    total_deductions_second_last = second_last_month_deductions.aggregate(total=Sum('amount'))['total'] or 0
+    total_savings_second_last = total_income_second_last - total_deductions_second_last
+
+    # Prepare data for the report
+    context = {
+        'previous_month_name': second_last_month.strftime('%B'),  # Name of the second last month
+        'transactions': second_last_month_transactions,
+        'total_income_previous': total_income_second_last,
+        'total_deductions_previous': total_deductions_second_last,
+        'total_savings_previous': total_savings_second_last,
+        'generation_time': now.strftime('%Y-%m-%d %H:%M:%S'),  # Add generation time
+    }
+
+    # Generate the report
+    if format == 'pdf':
+        return prereport(context)
+    elif format == 'png':
+        return prereport(context)

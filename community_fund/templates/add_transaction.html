@@ -34,7 +34,7 @@
         .card {
             backdrop-filter: blur(15px); /* Glass effect */
             background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
-            border-radius: 15px;
+            border-radius: 7px;
             box-shadow: inset 0 0 4px rgba(0, 55, 55, 0.9); /* Glow effect from inside */
             padding: 20px;
             width: 45%;
@@ -53,7 +53,7 @@
         .ard {
             backdrop-filter: blur(15px); /* Glass effect */
             background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
-            border-radius: 15px;
+            border-radius: 7px;
             box-shadow: inset 0 0 4px rgba(0, 55, 55, 0.9); /* Glow effect from inside */
             padding: 20px;
             width: 45%;
@@ -264,7 +264,7 @@
             <h2>Generate Report for Current Month</h2>
             <form method="GET" action="{% url 'generate_report' %}">
                 <div class="radio-group">
-                    <input type="radio" id="pdf-current" name="format" value="pdf" class="radio">
+                    <input type="radio" id="pdf-current" name="format" value="pdf" class="radio" checked>
                     <label for="pdf-current" class="radio-label">PDF</label>
                     <input type="radio" id="png-current" name="format" value="png" class="radio">
                     <label for="png-current" class="radio-label">PNG</label>
@@ -275,17 +275,32 @@
     
         <!-- Second Card: Previous Month -->
         <div class="card">
-            <h2>Generate Report for Previous Month</h2>
+            <h2>Generate Report for Last Month</h2>
             <form method="GET" action="{% url 'prreport' %}">
                 <div class="radio-group">
-                    <input type="radio" id="pdf-previous" name="format" value="pdf" class="radio">
+                    <input type="radio" id="pdf-previous" name="format" value="pdf" class="radio"checked>
                     <label for="pdf-previous" class="radio-label">PDF</label>
                     <input type="radio" id="png-previous" name="format" value="png" class="radio">
                     <label for="png-previous" class="radio-label">PNG</label>
                 </div>
-                <button type="submit">Generate Previous Month Report</button>
+                <button type="submit">Generate Last Month Report</button>
             </form>
         </div>
+
+        <!-- Second-to-Last Month Report Card -->
+        <div class="card">
+            <h2>Generate Report for Second Last Month</h2>
+            <form method="GET" action="{% url 'second_last_month_report' %}">
+                <div class="radio-group">
+                    <input type="radio" id="pdf-second-last" name="format" value="pdf" class="radio"checked>
+                    <label for="pdf-second-last" class="radio-label">PDF</label>
+                    <input type="radio" id="png-second-last" name="format" value="png" class="radio">
+                    <label for="png-second-last" class="radio-label">PNG</label>
+                </div>
+                <button type="submit">Generate Second Last Month Report</button>
+            </form>
+        </div>
+
     </div>
     <!-- Footer Section -->
 </body>

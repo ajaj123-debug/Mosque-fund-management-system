@@ -15,6 +15,7 @@ urlpatterns = [
     path('add_transaction/', views.add_transaction, name='add_transaction'),
     path('generate_report/', views.generate_report, name='generate_report'),
     path('prreport/', views.prreport, name='prreport'),
+    path('second-last-month-report/', views.second_last_month_report, name='second_last_month_report'),
     path('generate_user_report/', views.generate_user_report, name='generate_user_report'),
     path('monthwise-report/', monthwise_report, name='monthwise_report'),
     path('namaz-times/', views.namaz_times_view, name='namaz_times'),

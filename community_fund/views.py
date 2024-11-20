@@ -662,6 +662,7 @@ def prreport(request):
         'total_deductions_previous': total_deductions_previous,
         'total_savings_previous': total_savings_previous,
         'generation_time': now.strftime('%Y-%m-%d %H:%M:%S'),  # Add generation time
+        'year': current_year,
     }
 
     if format == 'pdf':

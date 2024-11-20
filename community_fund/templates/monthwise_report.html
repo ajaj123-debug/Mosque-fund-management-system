@@ -7,22 +7,34 @@
     <title>Monthwise Report</title>
     <link rel="icon" type="image/jpg" href="{% static 'aha.jpg' %}">
     <style>
-        /* General styles */
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
             background-color: #f5f5f5;
             color: #333;
         }
 
-        h1 {
+        header {
+            background: #005f73;
+            color: white;
             text-align: center;
+            padding: 10px 0;
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+        }
+
+        h1 {
             font-size: 2.5rem;
-            color: #005f73;
+            color: #f5f5f5;
+            margin: 10px 0;
         }
 
         h2, h3 {
             color: #005f73;
+            margin-left: 20px; /* Shifted slightly to the right */
         }
 
         table {
@@ -63,29 +75,19 @@
             font-weight: bold;
             border-radius: 5px;
             text-align: center;
+            margin-left: 20px; /* Shift slightly to the right */
         }
 
         a:hover {
-            background-color: #00a7b4;
+            background-color: #f0f0f0;
             box-shadow: 0 0 15px rgba(0, 95, 115, 0.7);
             transition: all 0.3s ease;
         }
 
-        /* Button styles */
-        button {
-            padding: 10px 20px;
-            background-color: #005f73;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        button:hover {
-            background-color: #00a7b4;
-            box-shadow: 0 0 15px rgba(0, 95, 115, 0.7);
+        /* Scrollable table for responsiveness */
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
         }
 
         /* Responsive styling */
@@ -103,69 +105,30 @@
                 font-size: 1rem;
                 padding: 8px 16px;
             }
-
-            button {
-                font-size: 1rem;
-                padding: 8px 16px;
-            }
         }
     </style>
 </head>
 <body>
-    <h1>ماہانہ رپورٹ</h1>
-    
+    <header>
+        <nav>
+            <a href="{% url 'index' %}">Home</a>
+            <a href="{% url 'home' %}">Dashboard</a>
+            <a href="{% url 'home' %}">Savings</a>
+            <a href="{% url 'namaz_times' %}">Namaz time</a>
+            <a href="{% url 'generate_user_report' %}">Reports</a>
+            <a href="{% url 'add_transaction' %}">Manage</a>
+        </nav>
+        <h1>بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ</h1>
+        <h1>ماہانہ رپورٹ</h1>
+    </header>
+
     <h2>Current Month: {{ current_month_name }} {{ year }}</h2>
     <h3>Total Income of {{ current_month_name }}: ₹{{ total_income_current }}</h3>
     <h3>Total Deductions of {{ current_month_name }}: ₹{{ total_deductions_current }}</h3>
     <h3>Total Savings of {{ current_month_name }}: ₹{{ total_savings_current }}</h3>
 
     <h3>Transactions</h3>
-    <table>
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Amount</th>
-                <th>Date</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for transaction in current_month_transactions %}
-            <tr>
-                <td>{{ transaction.user.name }}</td>
-                <td>₹{{ transaction.amount }}</td>
-                <td>{{ transaction.date }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-
-    <h3>Deductions</h3>
-    <table>
-        <thead>
-            <tr>
-                <th>Category</th>
-                <th>Amount</th>
-                <th>Date</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for deduction in current_month_deductions %}
-            <tr>
-                <td>{{ deduction.category }}</td>
-                <td>₹{{ deduction.amount }}</td>
-                <td>{{ deduction.date }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-
-    <h2>Previous Month: {{ previous_month_name }} {{ year }}</h2>
-    {% if previous_month_data_available %}
-        <h3>Total Income {{ previous_month_name }}: ₹{{ total_income_previous }}</h3>
-        <h3>Total Deductions {{ previous_month_name }}: ₹{{ total_deductions_previous }}</h3>
-        <h3>Total Savings {{ previous_month_name }}: ₹{{ total_savings_previous }}</h3>
-
-        <h3>Transactions</h3>
+    <div class="table-container">
         <table>
             <thead>
                 <tr>
@@ -175,7 +138,7 @@
                 </tr>
             </thead>
             <tbody>
-                {% for transaction in previous_month_transactions %}
+                {% for transaction in current_month_transactions %}
                 <tr>
                     <td>{{ transaction.user.name }}</td>
                     <td>₹{{ transaction.amount }}</td>
@@ -184,8 +147,10 @@
                 {% endfor %}
             </tbody>
         </table>
+    </div>
 
-        <h3>Deductions</h3>
+    <h3>Deductions</h3>
+    <div class="table-container">
         <table>
             <thead>
                 <tr>
@@ -195,7 +160,7 @@
                 </tr>
             </thead>
             <tbody>
-                {% for deduction in previous_month_deductions %}
+                {% for deduction in current_month_deductions %}
                 <tr>
                     <td>{{ deduction.category }}</td>
                     <td>₹{{ deduction.amount }}</td>
@@ -204,6 +169,57 @@
                 {% endfor %}
             </tbody>
         </table>
+    </div>
+
+    <h2>Previous Month: {{ previous_month_name }} {{ year }}</h2>
+    {% if previous_month_data_available %}
+        <h3>Total Income {{ previous_month_name }}: ₹{{ total_income_previous }}</h3>
+        <h3>Total Deductions {{ previous_month_name }}: ₹{{ total_deductions_previous }}</h3>
+        <h3>Total Savings {{ previous_month_name }}: ₹{{ total_savings_previous }}</h3>
+
+        <h3>Transactions</h3>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Amount</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for transaction in previous_month_transactions %}
+                    <tr>
+                        <td>{{ transaction.user.name }}</td>
+                        <td>₹{{ transaction.amount }}</td>
+                        <td>{{ transaction.date }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <h3>Deductions</h3>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Amount</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for deduction in previous_month_deductions %}
+                    <tr>
+                        <td>{{ deduction.category }}</td>
+                        <td>₹{{ deduction.amount }}</td>
+                        <td>{{ deduction.date }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     {% else %}
         <h3>No data available for {{ previous_month_name }} {{ year }}.</h3>
     {% endif %}
